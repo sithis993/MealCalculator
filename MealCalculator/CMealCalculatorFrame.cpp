@@ -1,0 +1,176 @@
+#include "CMealCalculatorFrame.h"
+#include "wx/msgdlg.h"
+
+
+
+CMealCalculatorFrame::CMealCalculatorFrame(wxWindow* parent) : MealCalculatorFrame(parent)
+{
+	meal = new CMeal();
+
+	setEvents();
+}
+
+
+CMealCalculatorFrame::~CMealCalculatorFrame()
+{
+}
+
+// Set up event handlers (Timers, Buttons etc.)
+void CMealCalculatorFrame::setEvents()
+{
+
+	AddToMealButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::addIngredient, this);
+
+}
+
+// Adds the current ingredient to the Meal
+void CMealCalculatorFrame::addIngredient(wxEvent & event)
+{
+	// Get field data
+	std::string name = getName();
+	float grams = getGrams();
+	float calories = getCalories();
+	float fat = getFat();
+	float carbohydrates = getCarbohydrates();
+	float protein = getProtein();
+
+	// Valdiate fields
+	// TODO Check to see if an ingredient with this name alreay exists?
+	// Actually here we'll just want to update the values, so not create another
+	if (name.empty())
+	{
+		showError("Ingredient must have a name");
+		return;
+	}
+
+	if (grams == 0.0)
+	{
+		showError("Ingredient grams must be a number greater than zero");
+		return;
+	}
+
+	if (calories == 0.0)
+	{
+		showError("Ingredient calories must be a number greater than zero");
+		return;
+	}
+
+	// Create ingredient and add to meal
+	CIngredient* ingredient = new CIngredient(
+		name, 
+		grams,
+		calories,
+		fat,
+		carbohydrates,
+		protein
+		);
+	meal->addIngredient(*ingredient);
+	addListBoxEntry(name);
+}
+
+/* Creates and displays an error dialog */
+void CMealCalculatorFrame::showError(std::string message)
+{
+	wxMessageDialog(nullptr, message, "Error", wxICON_ERROR).ShowModal();
+
+}
+
+/* Adds an item to the Meal Ingredients ListBox */
+void CMealCalculatorFrame::addListBoxEntry(std::string entry)
+{
+	wxArrayString strings = wxArrayString();
+	strings.Add(entry);
+	MealIngredientsListBox->InsertItems(strings, MealIngredientsListBox->GetCount());
+}
+
+/* Get the current vaue of the Ingredient Name TextCtrl */
+std::string CMealCalculatorFrame::getName()
+{
+	return IngredientNameTextCtrl->GetValue().ToStdString();
+}
+
+/* Gets the current value of the Ingredient Grams TextCtrl */
+float CMealCalculatorFrame::getGrams()
+{
+	float iGrams = 0.f;
+	std::string sGrams = IngredientGramsTextCtrl->GetValue().ToStdString();
+
+	try
+	{
+		iGrams = std::stof(sGrams);
+	}
+	catch (const std::invalid_argument& ia)
+	{
+	}
+
+	return iGrams;
+}
+
+/* Get the current vaue of the Ingredient Calories TextCtrl */
+float CMealCalculatorFrame::getCalories()
+{
+	float iCalories = 0.f;
+	std::string sCalories = IngredientCaloriesTextCtrl->GetValue().ToStdString();
+
+	try
+	{
+		iCalories = std::stof(sCalories);
+	}
+	catch (const std::invalid_argument& ia)
+	{
+	}
+
+	return iCalories;
+}
+
+/* Get the current vaue of the Ingredient Fat TextCtrl */
+float CMealCalculatorFrame::getFat()
+{
+	float iFat = 0.f;
+	std::string sFat = IngredientFatTextCtrl->GetValue().ToStdString();
+
+	try
+	{
+		iFat = std::stof(sFat);
+	}
+	catch (const std::invalid_argument& ia)
+	{
+	}
+
+	return iFat;
+}
+
+/* Get the current vaue of the Ingredient Carbohydrates TextCtrl */
+float CMealCalculatorFrame::getCarbohydrates()
+{
+	float iCarbohydrates = 0.f;
+	std::string sCarbohydrates = IngredientCarbohydratesTextCtrl->GetValue().ToStdString();
+
+	try
+	{
+		iCarbohydrates = std::stof(sCarbohydrates);
+	}
+	catch (const std::invalid_argument& ia)
+	{
+	}
+
+	return iCarbohydrates;
+}
+
+/* Get the current vaue of the Ingredient Protein TextCtrl */
+float CMealCalculatorFrame::getProtein()
+{
+	float iProtein = 0.f;
+	std::string sProtein = IngredientProteinTextCtrl->GetValue().ToStdString();
+
+	try
+	{
+		iProtein = std::stof(sProtein);
+	}
+	catch (const std::invalid_argument& ia)
+	{
+	}
+
+	return iProtein;
+}
+
