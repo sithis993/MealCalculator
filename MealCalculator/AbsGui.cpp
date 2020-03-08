@@ -30,6 +30,23 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	MealIngredientsListBox = new wxListBox( sbSizer1->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
 	sbSizer1->Add( MealIngredientsListBox, 1, wxALL|wxEXPAND, 5 );
 
+	wxBoxSizer* bSizer87;
+	bSizer87 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticText54 = new wxStaticText( sbSizer1->GetStaticBox(), wxID_ANY, wxT("Total"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText54->Wrap( -1 );
+	bSizer87->Add( m_staticText54, 0, wxALL, 5 );
+
+
+	bSizer87->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	IngredientsCountLabel = new wxStaticText( sbSizer1->GetStaticBox(), wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0 );
+	IngredientsCountLabel->Wrap( -1 );
+	bSizer87->Add( IngredientsCountLabel, 0, wxALL, 5 );
+
+
+	sbSizer1->Add( bSizer87, 0, wxEXPAND, 5 );
+
 
 	bSizer4->Add( sbSizer1, 1, wxEXPAND, 5 );
 
@@ -157,8 +174,8 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 
 	bSizer6->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	AddToMealButton = new wxButton( IngredientDetailsPanel, wxID_ANY, wxT("Add to Meal"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer6->Add( AddToMealButton, 0, wxALL|wxEXPAND, 5 );
+	IngredientButton = new wxButton( IngredientDetailsPanel, wxID_ANY, wxT("Add to Meal"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer6->Add( IngredientButton, 0, wxALL|wxEXPAND, 5 );
 
 
 	IngredientDetailsPanel->SetSizer( bSizer6 );

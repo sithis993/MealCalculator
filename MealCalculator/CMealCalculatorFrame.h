@@ -21,6 +21,7 @@ private:
 	void removeIngredient(wxEvent& event);
 	void clearIngredientTextCtrls();
 	void selectIngredient(wxEvent& event);
+	void updateIngredientButton(wxEvent& event);
 	void showError(std::string message);
 	void showInfo(std::string message);
 

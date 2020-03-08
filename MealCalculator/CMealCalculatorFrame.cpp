@@ -20,9 +20,10 @@ CMealCalculatorFrame::~CMealCalculatorFrame()
 void CMealCalculatorFrame::setEvents()
 {
 
-	AddToMealButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::addIngredient, this);
+	IngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::addIngredient, this);
 	RemoveIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::removeIngredient, this);
 	MealIngredientsListBox->Bind(wxEVT_LISTBOX, &CMealCalculatorFrame::selectIngredient, this);
+	IngredientNameTextCtrl->Bind(wxEVT_TEXT, &CMealCalculatorFrame::updateIngredientButton, this);
 
 }
 
@@ -72,6 +73,7 @@ void CMealCalculatorFrame::addIngredient(wxEvent & event)
 		);
 		meal->addIngredient(*ingredient);
 		addListBoxEntry(name);
+		IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
 		clearIngredientTextCtrls();
 	}
 	else
@@ -99,7 +101,9 @@ void CMealCalculatorFrame::removeIngredient(wxEvent & event)
 
 	// Remove List Box selection and clear form 
 	MealIngredientsListBox->Delete(selectedItemIndex);
+	IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
 	clearIngredientTextCtrls();
+
 }
 
 /* Clears the Ingredient detail Text Ctrls */
@@ -147,6 +151,19 @@ void CMealCalculatorFrame::selectIngredient(wxEvent & event)
 	// Protein
 	sprintf(stringBuffer, "%.2f", ingredient->getProtein());
 	IngredientProteinTextCtrl->SetValue(std::string(stringBuffer));
+}
+
+void CMealCalculatorFrame::updateIngredientButton(wxEvent & event)
+{
+	if (meal->hasIngredient(getName()))
+	{
+		IngredientButton->SetLabelText("Update Ingredient");
+	}
+	else
+	{
+		IngredientButton->SetLabelText("Add to Meal");
+	}
+
 }
 
 

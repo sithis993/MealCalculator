@@ -15,6 +15,7 @@
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
+#include <wx/stattext.h>
 #include <wx/sizer.h>
 #include <wx/statbox.h>
 #include <wx/bitmap.h>
@@ -22,7 +23,6 @@
 #include <wx/icon.h>
 #include <wx/button.h>
 #include <wx/panel.h>
-#include <wx/stattext.h>
 #include <wx/textctrl.h>
 #include <wx/frame.h>
 
@@ -40,6 +40,8 @@ class MealCalculatorFrame : public wxFrame
 		wxPanel* MainPanel;
 		wxPanel* MealIngredientsPanel;
 		wxListBox* MealIngredientsListBox;
+		wxStaticText* m_staticText54;
+		wxStaticText* IngredientsCountLabel;
 		wxButton* RemoveIngredientButton;
 		wxPanel* IngredientDetailsPanel;
 		wxStaticText* m_staticText1;
@@ -54,7 +56,7 @@ class MealCalculatorFrame : public wxFrame
 		wxTextCtrl* IngredientCarbohydratesTextCtrl;
 		wxStaticText* m_staticText15;
 		wxTextCtrl* IngredientProteinTextCtrl;
-		wxButton* AddToMealButton;
+		wxButton* IngredientButton;
 		wxPanel* MealActionsPanel;
 		wxButton* m_button3;
 		wxButton* m_button4;
