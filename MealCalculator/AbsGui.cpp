@@ -187,8 +187,8 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	wxStaticBoxSizer* sbSizer6;
 	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( MealActionsPanel, wxID_ANY, wxT("Meal Actions") ), wxVERTICAL );
 
-	m_button3 = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Calculate"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer6->Add( m_button3, 0, wxALL|wxEXPAND, 5 );
+	CalculateButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Calculate"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer6->Add( CalculateButton, 0, wxALL|wxEXPAND, 5 );
 
 	m_button4 = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Save Meal"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer6->Add( m_button4, 0, wxALL|wxEXPAND, 5 );
@@ -234,6 +234,12 @@ MealNutritionFrame::MealNutritionFrame( wxWindow* parent, wxWindowID id, const w
 	wxStaticBoxSizer* sbSizer18;
 	sbSizer18 = new wxStaticBoxSizer( new wxStaticBox( m_panel20, wxID_ANY, wxT("Per 100g") ), wxVERTICAL );
 
+	wxBoxSizer* bSizer88;
+	bSizer88 = new wxBoxSizer( wxHORIZONTAL );
+
+	wxBoxSizer* bSizer89;
+	bSizer89 = new wxBoxSizer( wxVERTICAL );
+
 	wxBoxSizer* bSizer8;
 	bSizer8 = new wxBoxSizer( wxHORIZONTAL );
 
@@ -244,27 +250,11 @@ MealNutritionFrame::MealNutritionFrame( wxWindow* parent, wxWindowID id, const w
 
 	bSizer8->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	m_textCtrl3 = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
-	bSizer8->Add( m_textCtrl3, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	CaloriesTextCtrl = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
+	bSizer8->Add( CaloriesTextCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
 
-	sbSizer18->Add( bSizer8, 1, wxEXPAND, 5 );
-
-	wxBoxSizer* bSizer81;
-	bSizer81 = new wxBoxSizer( wxHORIZONTAL );
-
-	m_staticText31 = new wxStaticText( sbSizer18->GetStaticBox(), wxID_ANY, wxT("Fat"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText31->Wrap( -1 );
-	bSizer81->Add( m_staticText31, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-
-
-	bSizer81->Add( 0, 0, 1, wxEXPAND, 5 );
-
-	m_textCtrl31 = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
-	bSizer81->Add( m_textCtrl31, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-
-
-	sbSizer18->Add( bSizer81, 1, wxEXPAND, 5 );
+	bSizer89->Add( bSizer8, 1, wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer811;
 	bSizer811 = new wxBoxSizer( wxHORIZONTAL );
@@ -276,11 +266,33 @@ MealNutritionFrame::MealNutritionFrame( wxWindow* parent, wxWindowID id, const w
 
 	bSizer811->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	m_textCtrl311 = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
-	bSizer811->Add( m_textCtrl311, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	CarbohydratesTextCtrl = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
+	bSizer811->Add( CarbohydratesTextCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
 
-	sbSizer18->Add( bSizer811, 1, wxEXPAND, 5 );
+	bSizer89->Add( bSizer811, 1, wxEXPAND, 5 );
+
+
+	bSizer88->Add( bSizer89, 1, 0, 5 );
+
+	wxBoxSizer* bSizer90;
+	bSizer90 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer81;
+	bSizer81 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticText31 = new wxStaticText( sbSizer18->GetStaticBox(), wxID_ANY, wxT("Fat"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	bSizer81->Add( m_staticText31, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+
+
+	bSizer81->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	FatTextCtrl = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
+	bSizer81->Add( FatTextCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+
+
+	bSizer90->Add( bSizer81, 1, wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer8111;
 	bSizer8111 = new wxBoxSizer( wxHORIZONTAL );
@@ -292,26 +304,32 @@ MealNutritionFrame::MealNutritionFrame( wxWindow* parent, wxWindowID id, const w
 
 	bSizer8111->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	m_textCtrl3111 = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
-	bSizer8111->Add( m_textCtrl3111, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	ProteinTextCtrl = new wxTextCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY );
+	bSizer8111->Add( ProteinTextCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
 
-	sbSizer18->Add( bSizer8111, 1, wxEXPAND, 5 );
+	bSizer90->Add( bSizer8111, 1, wxEXPAND, 5 );
+
+
+	bSizer88->Add( bSizer90, 1, 0, 5 );
+
+
+	sbSizer18->Add( bSizer88, 1, 0, 5 );
 
 
 	m_panel20->SetSizer( sbSizer18 );
 	m_panel20->Layout();
 	sbSizer18->Fit( m_panel20 );
-	MainSizer->Add( m_panel20, 1, wxEXPAND | wxALL, 5 );
+	MainSizer->Add( m_panel20, 0, wxALL, 5 );
 
 	CloseButton = new wxButton( MainPanel, wxID_ANY, wxT("Close"), wxDefaultPosition, wxDefaultSize, 0 );
-	MainSizer->Add( CloseButton, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxEXPAND, 5 );
+	MainSizer->Add( CloseButton, 0, wxALL|wxEXPAND, 5 );
 
 
 	MainPanel->SetSizer( MainSizer );
 	MainPanel->Layout();
 	MainSizer->Fit( MainPanel );
-	bSizer24->Add( MainPanel, 1, wxALL|wxEXPAND, 5 );
+	bSizer24->Add( MainPanel, 1, wxALL, 0 );
 
 
 	this->SetSizer( bSizer24 );

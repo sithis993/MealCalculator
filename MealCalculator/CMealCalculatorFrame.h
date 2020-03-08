@@ -4,6 +4,7 @@
 
 #include "CMeal.h"
 #include "CIngredient.h"
+#include "CMealNutritionFrame.h"
 
 class CMealCalculatorFrame : public MealCalculatorFrame
 {
@@ -14,6 +15,7 @@ public:
 private:
 	CMeal* meal = nullptr;
 	std::vector<CIngredient> mealIngredients;
+	CMealNutritionFrame* mealNutritionFrame;
 
 private:
 	void setEvents();
@@ -26,6 +28,8 @@ private:
 	void showInfo(std::string message);
 
 	void addListBoxEntry(std::string);
+	void calculate(wxEvent& event);
+	void closeMealNutritionFrame(wxEvent& event);
 
 	std::string getName();
 	float getGrams();

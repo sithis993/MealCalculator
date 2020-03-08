@@ -58,7 +58,7 @@ class MealCalculatorFrame : public wxFrame
 		wxTextCtrl* IngredientProteinTextCtrl;
 		wxButton* IngredientButton;
 		wxPanel* MealActionsPanel;
-		wxButton* m_button3;
+		wxButton* CalculateButton;
 		wxButton* m_button4;
 		wxButton* m_button5;
 
@@ -81,18 +81,18 @@ class MealNutritionFrame : public wxFrame
 		wxPanel* MainPanel;
 		wxPanel* m_panel20;
 		wxStaticText* m_staticText3;
-		wxTextCtrl* m_textCtrl3;
-		wxStaticText* m_staticText31;
-		wxTextCtrl* m_textCtrl31;
+		wxTextCtrl* CaloriesTextCtrl;
 		wxStaticText* m_staticText311;
-		wxTextCtrl* m_textCtrl311;
+		wxTextCtrl* CarbohydratesTextCtrl;
+		wxStaticText* m_staticText31;
+		wxTextCtrl* FatTextCtrl;
 		wxStaticText* m_staticText3111;
-		wxTextCtrl* m_textCtrl3111;
+		wxTextCtrl* ProteinTextCtrl;
 		wxButton* CloseButton;
 
 	public:
 
-		MealNutritionFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Nutrition"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 377,227 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MealNutritionFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Nutrition"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 422,182 ), long style = wxDEFAULT_FRAME_STYLE|wxFRAME_FLOAT_ON_PARENT|wxTAB_TRAVERSAL );
 
 		~MealNutritionFrame();
 

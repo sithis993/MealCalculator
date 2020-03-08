@@ -6,10 +6,10 @@ CIngredient::CIngredient(std::string name, float grams, float calories,
 {
 	this->name = name;
 	this->grams = grams;
-	this->calories = calories;
-	this->fat = fat;
-	this->carbohydrates = carbohydrates;
-	this->protein = protein;
+	this->caloriesPer100g = calories;
+	this->fatPer100g = fat;
+	this->carbohydratesPer100g = carbohydrates;
+	this->proteinPer100g = protein;
 
 }
 
@@ -18,57 +18,92 @@ CIngredient::~CIngredient()
 {
 }
 
+/* Gets the ingredient's name */
 std::string CIngredient::getName()
 {
 	return name;
 }
 
+/* Gets the amount of ingredient grams */
 float CIngredient::getGrams()
 {
 	return grams;
 }
 
-float CIngredient::getCalories()
+/* Gets the number of ingredient calories per 100g */
+float CIngredient::getCaloriesPer100g()
 {
-	return calories;
+	return caloriesPer100g;
 }
 
-float CIngredient::getFat()
+/* Gets the amount of fat in grams per 100g of ingredient */
+float CIngredient::getFatPer100g()
 {
-	return fat;
+	return fatPer100g;
 }
 
-float CIngredient::getCarbohydrates()
+/* Gets the amount of carbohydrates in grams per 100g of ingredient */
+float CIngredient::getCarbohydratesPer100g()
 {
-	return carbohydrates;
+	return carbohydratesPer100g;
 }
 
-float CIngredient::getProtein()
+/* Gets the amount of protein in grams per 100g of ingredient */
+float CIngredient::getProteinPer100g()
 {
-	return protein;
+	return proteinPer100g;
 }
 
+/* Gets the total amount of calories */
+float CIngredient::getTotalCalories()
+{
+	return getCaloriesPer100g() * (getGrams() / 100);
+}
+
+/* Gets the total amount of fat */
+float CIngredient::getTotalFat()
+{
+	return getFatPer100g() * (getGrams() / 100);
+}
+
+/* Gets the total amount of carbohydrates */
+float CIngredient::getTotalCarbohydrates()
+{
+	return getCarbohydratesPer100g() * (getGrams() / 100);
+}
+
+/* Gets the total amount of protein */
+float CIngredient::getTotalProtein()
+{
+	return getProteinPer100g() * (getGrams() / 100);
+}
+
+/* Sets the amount of ingredient grams */
 void CIngredient::setGrams(float grams)
 {
 	this->grams = grams;
 }
 
-void CIngredient::setCalories(float calories)
+/* Sets the number of calories per 100 grams of ingredient */
+void CIngredient::setCaloriesPer100g(float calories)
 {
-	this->calories = calories;
+	this->caloriesPer100g = calories;
 }
 
-void CIngredient::setFat(float fat)
+/* Sets the amount of fat in grams per 100 grams of ingredient */
+void CIngredient::setFatPer100g(float fat)
 {
-	this->fat = fat;
+	this->fatPer100g = fat;
 }
 
-void CIngredient::setCarbohydrates(float carbohydrates)
+/* Sets the amount of carbohydrates in grams per 100 grams of ingredient */
+void CIngredient::setCarbohydratesPer100g(float carbohydrates)
 {
-	this->carbohydrates = carbohydrates;
+	this->carbohydratesPer100g = carbohydrates;
 }
 
-void CIngredient::setProtein(float protein)
+/* Sets the amount of protein in grams per 100 grams of ingredient */
+void CIngredient::setProteinPer100g(float protein)
 {
-	this->protein = protein;
+	this->proteinPer100g = protein;
 }

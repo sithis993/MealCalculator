@@ -24,7 +24,7 @@ void CMealCalculatorFrame::setEvents()
 	RemoveIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::removeIngredient, this);
 	MealIngredientsListBox->Bind(wxEVT_LISTBOX, &CMealCalculatorFrame::selectIngredient, this);
 	IngredientNameTextCtrl->Bind(wxEVT_TEXT, &CMealCalculatorFrame::updateIngredientButton, this);
-
+	CalculateButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::calculate, this);
 }
 
 // Adds the current ingredient to the Meal
@@ -80,10 +80,10 @@ void CMealCalculatorFrame::addIngredient(wxEvent & event)
 	{
 		CIngredient* ingredient = meal->getIngredient(name);
 		ingredient->setGrams(grams);
-		ingredient->setCalories(calories);
-		ingredient->setFat(fat);
-		ingredient->setCarbohydrates(carbohydrates);
-		ingredient->setProtein(protein);
+		ingredient->setCaloriesPer100g(calories);
+		ingredient->setFatPer100g(fat);
+		ingredient->setCarbohydratesPer100g(carbohydrates);
+		ingredient->setProteinPer100g(protein);
 	}
 }
 
@@ -137,19 +137,19 @@ void CMealCalculatorFrame::selectIngredient(wxEvent & event)
 	IngredientGramsTextCtrl->SetValue(std::string(stringBuffer));
 
 	// Calories
-	sprintf(stringBuffer, "%.2f", ingredient->getCalories());
+	sprintf(stringBuffer, "%.2f", ingredient->getCaloriesPer100g());
 	IngredientCaloriesTextCtrl->SetValue(std::string(stringBuffer));
 
 	// Fat
-	sprintf(stringBuffer, "%.2f", ingredient->getFat());
+	sprintf(stringBuffer, "%.2f", ingredient->getFatPer100g());
 	IngredientFatTextCtrl->SetValue(std::string(stringBuffer));
 
 	// Carbohydrates
-	sprintf(stringBuffer, "%.2f", ingredient->getCarbohydrates());
+	sprintf(stringBuffer, "%.2f", ingredient->getCarbohydratesPer100g());
 	IngredientCarbohydratesTextCtrl->SetValue(std::string(stringBuffer));
 
 	// Protein
-	sprintf(stringBuffer, "%.2f", ingredient->getProtein());
+	sprintf(stringBuffer, "%.2f", ingredient->getProteinPer100g());
 	IngredientProteinTextCtrl->SetValue(std::string(stringBuffer));
 }
 
@@ -189,7 +189,20 @@ void CMealCalculatorFrame::addListBoxEntry(std::string entry)
 	MealIngredientsListBox->InsertItems(strings, MealIngredientsListBox->GetCount());
 }
 
-/* Get the current vaue of the Ingredient Name TextCtrl */
+/* Gets the Meal's nutrition and displays it in the Meal Nutrition Frame */
+void CMealCalculatorFrame::calculate(wxEvent & event)
+{
+	mealNutritionFrame = new CMealNutritionFrame(this);
+
+	mealNutritionFrame->setCalories(meal->getCaloriesPer100g());
+	mealNutritionFrame->setFat(meal->getFatPer100g());
+	mealNutritionFrame->setCarbohydrates(meal->getCarbohydratesPer100g());
+	mealNutritionFrame->setProtein(meal->getProteinPer100g());
+
+	mealNutritionFrame->Show();
+}
+
+/* Get the current value of the Ingredient Name TextCtrl */
 std::string CMealCalculatorFrame::getName()
 {
 	return IngredientNameTextCtrl->GetValue().ToStdString();
@@ -212,7 +225,7 @@ float CMealCalculatorFrame::getGrams()
 	return iGrams;
 }
 
-/* Get the current vaue of the Ingredient Calories TextCtrl */
+/* Get the current value of the Ingredient Calories TextCtrl */
 float CMealCalculatorFrame::getCalories()
 {
 	float iCalories = 0.f;
@@ -229,7 +242,7 @@ float CMealCalculatorFrame::getCalories()
 	return iCalories;
 }
 
-/* Get the current vaue of the Ingredient Fat TextCtrl */
+/* Get the current value of the Ingredient Fat TextCtrl */
 float CMealCalculatorFrame::getFat()
 {
 	float iFat = 0.f;
@@ -246,7 +259,7 @@ float CMealCalculatorFrame::getFat()
 	return iFat;
 }
 
-/* Get the current vaue of the Ingredient Carbohydrates TextCtrl */
+/* Get the current value of the Ingredient Carbohydrates TextCtrl */
 float CMealCalculatorFrame::getCarbohydrates()
 {
 	float iCarbohydrates = 0.f;
@@ -263,7 +276,7 @@ float CMealCalculatorFrame::getCarbohydrates()
 	return iCarbohydrates;
 }
 
-/* Get the current vaue of the Ingredient Protein TextCtrl */
+/* Get the current value of the Ingredient Protein TextCtrl */
 float CMealCalculatorFrame::getProtein()
 {
 	float iProtein = 0.f;

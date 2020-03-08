@@ -130,6 +130,7 @@
     <ClInclude Include="CMeal.h" />
     <ClInclude Include="CMealCalculator.h" />
     <ClInclude Include="CMealCalculatorFrame.h" />
+    <ClInclude Include="CMealNutritionFrame.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbsGui.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="CMeal.cpp" />
     <ClCompile Include="CMealCalculator.cpp" />
     <ClCompile Include="CMealCalculatorFrame.cpp" />
+    <ClCompile Include="CMealNutritionFrame.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
