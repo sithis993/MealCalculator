@@ -1,4 +1,5 @@
 #include "CMealCalculatorFrame.h"
+#include <sstream>
 #include "wx/msgdlg.h"
 
 
@@ -20,6 +21,8 @@ void CMealCalculatorFrame::setEvents()
 {
 
 	AddToMealButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::addIngredient, this);
+	RemoveIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::removeIngredient, this);
+	MealIngredientsListBox->Bind(wxEVT_LISTBOX, &CMealCalculatorFrame::selectIngredient, this);
 
 }
 
@@ -55,23 +58,109 @@ void CMealCalculatorFrame::addIngredient(wxEvent & event)
 		return;
 	}
 
+
 	// Create ingredient and add to meal
-	CIngredient* ingredient = new CIngredient(
-		name, 
-		grams,
-		calories,
-		fat,
-		carbohydrates,
-		protein
+	if (!meal->hasIngredient(name))
+	{
+		CIngredient* ingredient = new CIngredient(
+			name,
+			grams,
+			calories,
+			fat,
+			carbohydrates,
+			protein
 		);
-	meal->addIngredient(*ingredient);
-	addListBoxEntry(name);
+		meal->addIngredient(*ingredient);
+		addListBoxEntry(name);
+		clearIngredientTextCtrls();
+	}
+	else
+	{
+		CIngredient* ingredient = meal->getIngredient(name);
+		ingredient->setGrams(grams);
+		ingredient->setCalories(calories);
+		ingredient->setFat(fat);
+		ingredient->setCarbohydrates(carbohydrates);
+		ingredient->setProtein(protein);
+	}
 }
+
+/* Gets the name of the currently selected ingredient */
+/* Removes an ingredient from the Meal */
+void CMealCalculatorFrame::removeIngredient(wxEvent & event)
+{
+	int selectedItemIndex = MealIngredientsListBox->GetSelection();
+	if (selectedItemIndex == wxNOT_FOUND)
+		return;
+
+	// Remove ingredient from Meal
+	std::string ingredientName = MealIngredientsListBox->GetString(selectedItemIndex).ToStdString();
+	meal->removeIngredient(ingredientName);
+
+	// Remove List Box selection and clear form 
+	MealIngredientsListBox->Delete(selectedItemIndex);
+	clearIngredientTextCtrls();
+}
+
+/* Clears the Ingredient detail Text Ctrls */
+void CMealCalculatorFrame::clearIngredientTextCtrls()
+{
+	IngredientNameTextCtrl->Clear();
+	IngredientGramsTextCtrl->Clear();
+	IngredientCaloriesTextCtrl->Clear();
+	IngredientFatTextCtrl->Clear();
+	IngredientCarbohydratesTextCtrl->Clear();
+	IngredientProteinTextCtrl->Clear();
+
+}
+
+
+/* Meal Ingredients ListBox selection event handler*/
+void CMealCalculatorFrame::selectIngredient(wxEvent & event)
+{
+	int selectedItemIndex = MealIngredientsListBox->GetSelection();
+	std::string ingredientName = MealIngredientsListBox->GetString(selectedItemIndex).ToStdString();
+	CIngredient* ingredient =  meal->getIngredient(ingredientName);
+
+	// Set Text Ctrl values
+	char stringBuffer[100];
+
+	// Name
+	IngredientNameTextCtrl->SetValue(ingredient->getName());
+
+	// Grams
+	sprintf(stringBuffer, "%.2f", ingredient->getGrams());
+	IngredientGramsTextCtrl->SetValue(std::string(stringBuffer));
+
+	// Calories
+	sprintf(stringBuffer, "%.2f", ingredient->getCalories());
+	IngredientCaloriesTextCtrl->SetValue(std::string(stringBuffer));
+
+	// Fat
+	sprintf(stringBuffer, "%.2f", ingredient->getFat());
+	IngredientFatTextCtrl->SetValue(std::string(stringBuffer));
+
+	// Carbohydrates
+	sprintf(stringBuffer, "%.2f", ingredient->getCarbohydrates());
+	IngredientCarbohydratesTextCtrl->SetValue(std::string(stringBuffer));
+
+	// Protein
+	sprintf(stringBuffer, "%.2f", ingredient->getProtein());
+	IngredientProteinTextCtrl->SetValue(std::string(stringBuffer));
+}
+
 
 /* Creates and displays an error dialog */
 void CMealCalculatorFrame::showError(std::string message)
 {
 	wxMessageDialog(nullptr, message, "Error", wxICON_ERROR).ShowModal();
+
+}
+
+/* Creates and displays an info dialog */
+void CMealCalculatorFrame::showInfo(std::string message)
+{
+	wxMessageDialog(nullptr, message, "Information", wxICON_INFORMATION).ShowModal();
 
 }
 
@@ -173,4 +262,3 @@ float CMealCalculatorFrame::getProtein()
 
 	return iProtein;
 }
-

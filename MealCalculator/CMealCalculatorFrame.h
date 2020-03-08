@@ -18,7 +18,11 @@ private:
 private:
 	void setEvents();
 	void addIngredient(wxEvent& event);
+	void removeIngredient(wxEvent& event);
+	void clearIngredientTextCtrls();
+	void selectIngredient(wxEvent& event);
 	void showError(std::string message);
+	void showInfo(std::string message);
 
 	void addListBoxEntry(std::string);
 
@@ -28,7 +32,5 @@ private:
 	float getFat();
 	float getCarbohydrates();
 	float getProtein();
-
-
 };
 

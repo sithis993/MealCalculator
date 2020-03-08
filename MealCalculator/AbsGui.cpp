@@ -33,8 +33,8 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 
 	bSizer4->Add( sbSizer1, 1, wxEXPAND, 5 );
 
-	m_button1 = new wxButton( MealIngredientsPanel, wxID_ANY, wxT("Remove"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer4->Add( m_button1, 0, wxALL|wxEXPAND, 5 );
+	RemoveIngredientButton = new wxButton( MealIngredientsPanel, wxID_ANY, wxT("Remove"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer4->Add( RemoveIngredientButton, 0, wxALL|wxEXPAND, 5 );
 
 
 	MealIngredientsPanel->SetSizer( bSizer4 );

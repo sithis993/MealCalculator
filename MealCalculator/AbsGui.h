@@ -40,7 +40,7 @@ class MealCalculatorFrame : public wxFrame
 		wxPanel* MainPanel;
 		wxPanel* MealIngredientsPanel;
 		wxListBox* MealIngredientsListBox;
-		wxButton* m_button1;
+		wxButton* RemoveIngredientButton;
 		wxPanel* IngredientDetailsPanel;
 		wxStaticText* m_staticText1;
 		wxTextCtrl* IngredientNameTextCtrl;

@@ -12,6 +12,9 @@ public:
 
 public:
 	void addIngredient(CIngredient& ingredient);
+	bool hasIngredient(std::string ingredientName);
+	void removeIngredient(std::string ingredientName);
+	CIngredient* getIngredient(std::string ingredientName);
 
 	size_t getIngredientCount();
 
