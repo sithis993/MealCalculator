@@ -190,12 +190,6 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	CalculateButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Calculate"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer6->Add( CalculateButton, 0, wxALL|wxEXPAND, 5 );
 
-	m_button4 = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Save Meal"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer6->Add( m_button4, 0, wxALL|wxEXPAND, 5 );
-
-	m_button5 = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Load Meal"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer6->Add( m_button5, 0, wxALL|wxEXPAND, 5 );
-
 
 	MealActionsPanel->SetSizer( sbSizer6 );
 	MealActionsPanel->Layout();
