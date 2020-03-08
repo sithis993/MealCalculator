@@ -6,6 +6,7 @@
 
 CMealCalculatorFrame::CMealCalculatorFrame(wxWindow* parent) : MealCalculatorFrame(parent)
 {
+	SetTitle("Meal Calculator - v0.1.0");
 	meal = new CMeal();
 
 	setEvents();
