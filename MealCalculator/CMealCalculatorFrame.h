@@ -22,6 +22,7 @@ private:
 	void addIngredient(wxEvent& event);
 	void removeIngredient(wxEvent& event);
 	void clearIngredientTextCtrls();
+	void newIngredient(wxEvent& event);
 	void selectIngredient(wxEvent& event);
 	void updateIngredientButton(wxEvent& event);
 	void showError(std::string message);
@@ -29,7 +30,6 @@ private:
 
 	void addListBoxEntry(std::string);
 	void calculate(wxEvent& event);
-	void closeMealNutritionFrame(wxEvent& event);
 
 	std::string getName();
 	float getGrams();
