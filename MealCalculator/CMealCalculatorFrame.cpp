@@ -6,7 +6,7 @@
 
 CMealCalculatorFrame::CMealCalculatorFrame(wxWindow* parent) : MealCalculatorFrame(parent)
 {
-	SetTitle("Meal Calculator - v0.1.0");
+	SetTitle("Meal Calculator - v0.2.0");
 	meal = new CMeal();
 
 	setEvents();
@@ -26,6 +26,7 @@ void CMealCalculatorFrame::setEvents()
 	MealIngredientsListBox->Bind(wxEVT_LISTBOX, &CMealCalculatorFrame::selectIngredient, this);
 	IngredientNameTextCtrl->Bind(wxEVT_TEXT, &CMealCalculatorFrame::updateIngredientButton, this);
 	CalculateButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::calculate, this);
+	NewIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::newIngredient, this);
 }
 
 // Adds the current ingredient to the Meal
@@ -117,6 +118,20 @@ void CMealCalculatorFrame::clearIngredientTextCtrls()
 	IngredientCarbohydratesTextCtrl->Clear();
 	IngredientProteinTextCtrl->Clear();
 
+}
+
+/* Clears all ingredient Text Ctrls making it easier to add/create a new ingredient */
+void CMealCalculatorFrame::newIngredient(wxEvent & event)
+{
+	IngredientNameTextCtrl->Clear();
+	IngredientGramsTextCtrl->Clear();
+	IngredientCaloriesTextCtrl->Clear();
+	IngredientFatTextCtrl->Clear();
+	IngredientCarbohydratesTextCtrl->Clear();
+	IngredientProteinTextCtrl->Clear();
+
+	IngredientNameTextCtrl->SetFocus();
+	MealIngredientsListBox->DeselectAll();
 }
 
 

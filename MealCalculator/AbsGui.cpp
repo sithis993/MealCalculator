@@ -187,6 +187,9 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	wxStaticBoxSizer* sbSizer6;
 	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( MealActionsPanel, wxID_ANY, wxT("Meal Actions") ), wxVERTICAL );
 
+	NewIngredientButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("New Ingredient"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer6->Add( NewIngredientButton, 0, wxALL|wxEXPAND, 5 );
+
 	CalculateButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Calculate"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer6->Add( CalculateButton, 0, wxALL|wxEXPAND, 5 );
 

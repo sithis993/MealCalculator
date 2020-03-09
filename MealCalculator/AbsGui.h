@@ -58,6 +58,7 @@ class MealCalculatorFrame : public wxFrame
 		wxTextCtrl* IngredientProteinTextCtrl;
 		wxButton* IngredientButton;
 		wxPanel* MealActionsPanel;
+		wxButton* NewIngredientButton;
 		wxButton* CalculateButton;
 
 	public:
