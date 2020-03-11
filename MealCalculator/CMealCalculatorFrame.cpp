@@ -4,9 +4,9 @@
 
 
 
-CMealCalculatorFrame::CMealCalculatorFrame(wxWindow* parent) : MealCalculatorFrame(parent)
+CMealCalculatorFrame::CMealCalculatorFrame(wxWindow* parent, std::string version) : MealCalculatorFrame(parent)
 {
-	SetTitle("Meal Calculator - v0.2.0");
+	SetTitle("Meal Calculator - v" + version);
 	meal = new CMeal();
 
 	setEvents();
@@ -143,7 +143,7 @@ void CMealCalculatorFrame::selectIngredient(wxEvent & event)
 	CIngredient* ingredient =  meal->getIngredient(ingredientName);
 
 	// Set Text Ctrl values
-	char stringBuffer[100];
+	char stringBuffer[10];
 
 	// Name
 	IngredientNameTextCtrl->SetValue(ingredient->getName());
@@ -234,7 +234,7 @@ float CMealCalculatorFrame::getGrams()
 	{
 		iGrams = std::stof(sGrams);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -251,7 +251,7 @@ float CMealCalculatorFrame::getCalories()
 	{
 		iCalories = std::stof(sCalories);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -268,7 +268,7 @@ float CMealCalculatorFrame::getFat()
 	{
 		iFat = std::stof(sFat);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -285,7 +285,7 @@ float CMealCalculatorFrame::getCarbohydrates()
 	{
 		iCarbohydrates = std::stof(sCarbohydrates);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -302,7 +302,7 @@ float CMealCalculatorFrame::getProtein()
 	{
 		iProtein = std::stof(sProtein);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
