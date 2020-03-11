@@ -9,7 +9,7 @@
 class CMealCalculatorFrame : public MealCalculatorFrame
 {
 public:
-	CMealCalculatorFrame(wxWindow* parent);
+	CMealCalculatorFrame(wxWindow* parent, std::string version);
 	~CMealCalculatorFrame();
 
 private:

@@ -1,9 +1,9 @@
 #pragma once
 
-
 #include <vector>
 #include "wx/wx.h"
 
+#include "Version.h"
 #include "CMealCalculatorFrame.h"
 #include "CIngredient.h"
 

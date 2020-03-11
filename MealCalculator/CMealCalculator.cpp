@@ -13,7 +13,7 @@ CMealCalculator::~CMealCalculator()
 
 bool CMealCalculator::OnInit()
 {
-	mealCalculatorFrame = new CMealCalculatorFrame(nullptr);
+	mealCalculatorFrame = new CMealCalculatorFrame(nullptr, VERSION_STRING);
 	mealCalculatorFrame->Show();
 
 	mealCalculatorFrame->Center(wxBOTH);

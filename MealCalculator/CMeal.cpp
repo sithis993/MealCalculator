@@ -35,7 +35,7 @@ void CMeal::removeIngredient(std::string ingredientName)
 {
 	size_t ingredientCount = getIngredientCount();
 	int position = -1;
-	for (int i = 0; i < ingredientCount; i++)
+	for (unsigned int i = 0; i < ingredientCount; i++)
 	{
 		if (ingredients[i].getName() == ingredientName)
 		{
