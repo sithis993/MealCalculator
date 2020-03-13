@@ -1,0 +1,16 @@
+TODO
+----------------
+- Host project on Github and determine how/if we can use docker to solve problem of wxwidgets dependency
+- Implement Meal save and load capabilities
+- Implement saving and loading of individual ingredients
+	+ Ship with a base set of ingredients
+	+ Allow ingredient brands to be specified
+- Think about some location to host Meal Calc that can be accessed anywhere/by anyone
+	+ Host binary download on GitHub
+	
+DONE
+-----------------
+- Created a version file for holding version number and included this version no in the form title
+- Verified that char array cannot be overflowed
+- Fixed warning for unused exception variables
+- Fixed signed vs unsigned int comparison
