@@ -5,6 +5,8 @@
 #include "CMeal.h"
 #include "CIngredient.h"
 #include "CMealNutritionFrame.h"
+#include "CConfirmationDialog.h"
+
 
 class CMealCalculatorFrame : public MealCalculatorFrame
 {
@@ -16,6 +18,7 @@ private:
 	CMeal* meal = nullptr;
 	std::vector<CIngredient> mealIngredients;
 	CMealNutritionFrame* mealNutritionFrame;
+	CConfirmationDialog* confirmationDialog;
 
 private:
 	void setEvents();

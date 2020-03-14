@@ -27,6 +27,7 @@
 #include <wx/filepicker.h>
 #include <wx/statline.h>
 #include <wx/frame.h>
+#include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -103,6 +104,26 @@ class MealNutritionFrame : public wxFrame
 		MealNutritionFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Nutrition"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 422,182 ), long style = wxDEFAULT_FRAME_STYLE|wxFRAME_FLOAT_ON_PARENT|wxTAB_TRAVERSAL );
 
 		~MealNutritionFrame();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class ConfirmationDialog
+///////////////////////////////////////////////////////////////////////////////
+class ConfirmationDialog : public wxDialog
+{
+	private:
+
+	protected:
+		wxPanel* MainPanel;
+		wxStaticText* DialogStaticText;
+		wxButton* OkButton;
+		wxButton* CancelButton;
+
+	public:
+
+		ConfirmationDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Are you sure?"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP );
+		~ConfirmationDialog();
 
 };
 

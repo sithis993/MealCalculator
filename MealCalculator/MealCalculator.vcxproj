@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbsGui.h" />
+    <ClInclude Include="CConfirmationDialog.h" />
     <ClInclude Include="CIngredient.h" />
     <ClInclude Include="CMeal.h" />
     <ClInclude Include="CMealCalculator.h" />
@@ -135,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbsGui.cpp" />
+    <ClCompile Include="CConfirmationDialog.cpp" />
     <ClCompile Include="CIngredient.cpp" />
     <ClCompile Include="CMeal.cpp" />
     <ClCompile Include="CMealCalculator.cpp" />

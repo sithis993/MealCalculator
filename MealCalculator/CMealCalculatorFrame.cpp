@@ -91,8 +91,15 @@ void CMealCalculatorFrame::removeIngredient(wxEvent & event)
 	if (selectedItemIndex == wxNOT_FOUND)
 		return;
 
-	// Remove ingredient from Meal
 	std::string ingredientName = MealIngredientsListBox->GetString(selectedItemIndex).ToStdString();
+	confirmationDialog = new CConfirmationDialog(this, "Remove " + ingredientName + " from the meal?");
+	confirmationDialog->Center(wxBOTH);
+	confirmationDialog->ShowModal();
+
+	if (!confirmationDialog->wasConfirmed())
+		return;
+
+	// Remove ingredient from Meal
 	meal->removeIngredient(ingredientName);
 
 	// Remove List Box selection and clear form 
@@ -180,7 +187,6 @@ void CMealCalculatorFrame::loadIngredient(wxEvent& event)
 
 	// Set Text Ctrl values
 	IngredientNameTextCtrl->SetValue(ingredient->getName());
-	IngredientGramsTextCtrl->SetValue(ingredient->getGramsString());
 	IngredientCaloriesTextCtrl->SetValue(ingredient->getCaloriesPer100gString());
 	IngredientFatTextCtrl->SetValue(ingredient->getFatPer100gString());
 	IngredientCarbohydratesTextCtrl->SetValue(ingredient->getCarbohydratesPer100gString());
@@ -202,7 +208,13 @@ void CMealCalculatorFrame::saveIngredient(wxEvent& event)
 /* Clears all current meal ingredients and resets the ingredient form*/
 void CMealCalculatorFrame::newMeal(wxEvent& event)
 {
-	// TODO Add a confirmation box
+	confirmationDialog = new CConfirmationDialog(this, "All ingredients will be removed and any unsaved changes will be lost");
+	confirmationDialog->Center(wxBOTH);
+	confirmationDialog->ShowModal();
+
+	if (!confirmationDialog->wasConfirmed())
+		return;
+
 	meal->removeAllIngredients();
 	MealIngredientsListBox->Clear();
 	IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
@@ -262,14 +274,14 @@ void CMealCalculatorFrame::updateIngredientButton(wxEvent & event)
 /* Creates and displays an error dialog */
 void CMealCalculatorFrame::showError(std::string message)
 {
-	wxMessageDialog(nullptr, message, "Error", wxICON_ERROR).ShowModal();
+	wxMessageDialog(nullptr, message, "Error", wxICON_ERROR|wxCENTRE).ShowModal();
 
 }
 
 /* Creates and displays an info dialog */
 void CMealCalculatorFrame::showInfo(std::string message)
 {
-	wxMessageDialog(nullptr, message, "Information", wxICON_INFORMATION).ShowModal();
+	wxMessageDialog(nullptr, message, "Information", wxICON_INFORMATION|wxCENTRE).ShowModal();
 
 }
 

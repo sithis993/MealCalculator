@@ -153,7 +153,6 @@ void CIngredient::saveToFile(std::string path)
 	std::ofstream out(path);
 
 	out << name << "\n";
-	out << grams << "\n";
 	out << caloriesPer100g << "\n" ;
 	out << fatPer100g << "\n" ;
 	out << carbohydratesPer100g << "\n" ;
@@ -168,21 +167,19 @@ CIngredient* CIngredient::loadFromFile(std::string path)
 	std::ifstream in(path);
 
 	std::string name;
-	float grams;
 	float caloriesPer100g;
 	float fatPer100g;
 	float carbohydratesPer100g;
 	float proteinPer100g;
 
 	in >> name;
-	in >> grams;
 	in >> caloriesPer100g;
 	in >> fatPer100g;
 	in >> carbohydratesPer100g;
 	in >> proteinPer100g;
 
 	CIngredient* ingredient = new CIngredient(
-		name, grams, 
+		name, 0.0, 
 		caloriesPer100g, fatPer100g, 
 		carbohydratesPer100g, proteinPer100g
 	);

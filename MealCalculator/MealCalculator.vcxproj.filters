@@ -29,6 +29,9 @@
     <ClInclude Include="CMealNutritionFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CConfirmationDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMealCalculator.cpp">
@@ -47,6 +50,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CMealNutritionFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CConfirmationDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
