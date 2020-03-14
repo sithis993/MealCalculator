@@ -35,7 +35,7 @@ void CMeal::removeIngredient(std::string ingredientName)
 {
 	size_t ingredientCount = getIngredientCount();
 	int position = -1;
-	for (int i = 0; i < ingredientCount; i++)
+	for (unsigned int i = 0; i < ingredientCount; i++)
 	{
 		if (ingredients[i].getName() == ingredientName)
 		{
@@ -48,6 +48,12 @@ void CMeal::removeIngredient(std::string ingredientName)
 		return;
 
 	ingredients.erase(ingredients.begin() + position);
+}
+
+void CMeal::removeAllIngredients()
+{
+	ingredients.clear();
+
 }
 
 /* Gets the Meal ingredient specified */

@@ -4,12 +4,13 @@
 
 
 
-CMealCalculatorFrame::CMealCalculatorFrame(wxWindow* parent) : MealCalculatorFrame(parent)
+CMealCalculatorFrame::CMealCalculatorFrame(wxWindow* parent, std::string version) : MealCalculatorFrame(parent)
 {
-	SetTitle("Meal Calculator - v0.2.0");
+	SetTitle("Meal Calculator - v" + version);
 	meal = new CMeal();
 
 	setEvents();
+	updateVisuals();
 }
 
 
@@ -26,68 +27,61 @@ void CMealCalculatorFrame::setEvents()
 	MealIngredientsListBox->Bind(wxEVT_LISTBOX, &CMealCalculatorFrame::selectIngredient, this);
 	IngredientNameTextCtrl->Bind(wxEVT_TEXT, &CMealCalculatorFrame::updateIngredientButton, this);
 	CalculateButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::calculate, this);
+
 	NewIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::newIngredient, this);
+	LoadIngredientFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::loadIngredient, this);
+	SaveIngredientFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::saveIngredient, this);
+
+	NewMealButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::newMeal, this);
+}
+
+/* Make any GUI changes */
+void CMealCalculatorFrame::updateVisuals()
+{
+	// Load Ingredient Button
+	wxWindow* loadIngredientButtonWindow = FindWindowByLabel("Browse", LoadIngredientFilePicker);
+	loadIngredientButtonWindow->SetLabel("Load Ingredient");
+
+	// Save Ingredient Button
+	wxWindow* saveIngredientButtonWindow = FindWindowByLabel("Browse", SaveIngredientFilePicker);
+	saveIngredientButtonWindow->SetLabel("Save Ingredient");
+
+	// Load Meal Button
+	wxWindow* loadMealButtonWindow = FindWindowByLabel("Browse", LoadMealFilePicker);
+	loadMealButtonWindow->SetLabel("Load Meal");
+
+	// Save Meal Button
+	wxWindow* saveMealButtonWindow = FindWindowByLabel("Browse", SaveMealFilePicker);
+	saveMealButtonWindow->SetLabel("Save Meal");
 }
 
 // Adds the current ingredient to the Meal
 void CMealCalculatorFrame::addIngredient(wxEvent & event)
 {
-	// Get field data
-	std::string name = getName();
-	float grams = getGrams();
-	float calories = getCalories();
-	float fat = getFat();
-	float carbohydrates = getCarbohydrates();
-	float protein = getProtein();
-
-	// Valdiate fields
-	// TODO Check to see if an ingredient with this name alreay exists?
-	// Actually here we'll just want to update the values, so not create another
-	if (name.empty())
-	{
-		showError("Ingredient must have a name");
+	CIngredient* newIngredient = getCurrentIngredient();
+	if (!newIngredient)
 		return;
-	}
-
-	if (grams == 0.0)
-	{
-		showError("Ingredient grams must be a number greater than zero");
-		return;
-	}
-
-	if (calories == 0.0)
-	{
-		showError("Ingredient calories must be a number greater than zero");
-		return;
-	}
-
 
 	// Create ingredient and add to meal
-	if (!meal->hasIngredient(name))
+	if (!meal->hasIngredient(newIngredient->getName()))
 	{
-		CIngredient* ingredient = new CIngredient(
-			name,
-			grams,
-			calories,
-			fat,
-			carbohydrates,
-			protein
-		);
-		meal->addIngredient(*ingredient);
-		addListBoxEntry(name);
+		meal->addIngredient(*newIngredient);
+		addListBoxEntry(newIngredient->getName());
 		IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
 		clearIngredientTextCtrls();
 	}
 	else
 	{
-		CIngredient* ingredient = meal->getIngredient(name);
-		ingredient->setGrams(grams);
-		ingredient->setCaloriesPer100g(calories);
-		ingredient->setFatPer100g(fat);
-		ingredient->setCarbohydratesPer100g(carbohydrates);
-		ingredient->setProteinPer100g(protein);
+		CIngredient* oldIngredient = meal->getIngredient(newIngredient->getName());
+		oldIngredient->setGrams(newIngredient->getGrams());
+		oldIngredient->setCaloriesPer100g(newIngredient->getCaloriesPer100g());
+		oldIngredient->setFatPer100g(newIngredient->getFatPer100g());
+		oldIngredient->setCarbohydratesPer100g(newIngredient->getCarbohydratesPer100g());
+		oldIngredient->setProteinPer100g(newIngredient->getProteinPer100g());
 	}
+
 }
+
 
 /* Gets the name of the currently selected ingredient */
 /* Removes an ingredient from the Meal */
@@ -97,8 +91,15 @@ void CMealCalculatorFrame::removeIngredient(wxEvent & event)
 	if (selectedItemIndex == wxNOT_FOUND)
 		return;
 
-	// Remove ingredient from Meal
 	std::string ingredientName = MealIngredientsListBox->GetString(selectedItemIndex).ToStdString();
+	confirmationDialog = new CConfirmationDialog(this, "Remove " + ingredientName + " from the meal?");
+	confirmationDialog->Center(wxBOTH);
+	confirmationDialog->ShowModal();
+
+	if (!confirmationDialog->wasConfirmed())
+		return;
+
+	// Remove ingredient from Meal
 	meal->removeIngredient(ingredientName);
 
 	// Remove List Box selection and clear form 
@@ -120,18 +121,105 @@ void CMealCalculatorFrame::clearIngredientTextCtrls()
 
 }
 
+CIngredient* CMealCalculatorFrame::getCurrentIngredient()
+{
+	CIngredient* ingredient = nullptr;
+
+	// Get field data
+	std::string name = getName();
+	float grams = getGrams();
+	float calories = getCalories();
+	float fat = getFat();
+	float carbohydrates = getCarbohydrates();
+	float protein = getProtein();
+
+	// Valdiate fields
+	// TODO Check to see if an ingredient with this name alreay exists?
+	// Actually here we'll just want to update the values, so not create another
+	if (name.empty())
+	{
+		showError("Ingredient must have a name");
+		return ingredient;
+	}
+
+	if (grams == 0.0)
+	{
+		showError("Ingredient grams must be a number greater than zero");
+		return ingredient;
+	}
+
+	if (calories == 0.0)
+	{
+		showError("Ingredient calories must be a number greater than zero");
+		return ingredient;
+	}
+
+	ingredient = new CIngredient(
+		name,
+		grams,
+		calories,
+		fat,
+		carbohydrates,
+		protein
+	);
+
+	return ingredient;
+}
+
+
 /* Clears all ingredient Text Ctrls making it easier to add/create a new ingredient */
 void CMealCalculatorFrame::newIngredient(wxEvent & event)
 {
-	IngredientNameTextCtrl->Clear();
-	IngredientGramsTextCtrl->Clear();
-	IngredientCaloriesTextCtrl->Clear();
-	IngredientFatTextCtrl->Clear();
-	IngredientCarbohydratesTextCtrl->Clear();
-	IngredientProteinTextCtrl->Clear();
+	clearIngredientTextCtrls();
 
 	IngredientNameTextCtrl->SetFocus();
 	MealIngredientsListBox->DeselectAll();
+}
+
+/* Loads an ingredient from a file */
+void CMealCalculatorFrame::loadIngredient(wxEvent& event)
+{
+	// TODO Add exception/error handling when user tries to load a file that 
+	// isn't an ingredient
+	CIngredient* ingredient = CIngredient::loadFromFile(LoadIngredientFilePicker->GetPath().ToStdString());
+	if (!ingredient)
+		return;
+
+	// Set Text Ctrl values
+	IngredientNameTextCtrl->SetValue(ingredient->getName());
+	IngredientCaloriesTextCtrl->SetValue(ingredient->getCaloriesPer100gString());
+	IngredientFatTextCtrl->SetValue(ingredient->getFatPer100gString());
+	IngredientCarbohydratesTextCtrl->SetValue(ingredient->getCarbohydratesPer100gString());
+	IngredientProteinTextCtrl->SetValue(ingredient->getProteinPer100gString());
+	
+}
+
+/* Saves the current ingredient to a file */
+void CMealCalculatorFrame::saveIngredient(wxEvent& event)
+{
+	CIngredient* ingredient = getCurrentIngredient();
+	if (!ingredient)
+		return;
+
+	ingredient->saveToFile(SaveIngredientFilePicker->GetPath().ToStdString());
+	showInfo("Ingredient '" + ingredient->getName() + "' saved");
+}
+
+/* Clears all current meal ingredients and resets the ingredient form*/
+void CMealCalculatorFrame::newMeal(wxEvent& event)
+{
+	confirmationDialog = new CConfirmationDialog(this, "All ingredients will be removed and any unsaved changes will be lost");
+	confirmationDialog->Center(wxBOTH);
+	confirmationDialog->ShowModal();
+
+	if (!confirmationDialog->wasConfirmed())
+		return;
+
+	meal->removeAllIngredients();
+	MealIngredientsListBox->Clear();
+	IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
+	newIngredient(event);
+	
 }
 
 
@@ -143,7 +231,7 @@ void CMealCalculatorFrame::selectIngredient(wxEvent & event)
 	CIngredient* ingredient =  meal->getIngredient(ingredientName);
 
 	// Set Text Ctrl values
-	char stringBuffer[100];
+	char stringBuffer[10];
 
 	// Name
 	IngredientNameTextCtrl->SetValue(ingredient->getName());
@@ -186,14 +274,14 @@ void CMealCalculatorFrame::updateIngredientButton(wxEvent & event)
 /* Creates and displays an error dialog */
 void CMealCalculatorFrame::showError(std::string message)
 {
-	wxMessageDialog(nullptr, message, "Error", wxICON_ERROR).ShowModal();
+	wxMessageDialog(nullptr, message, "Error", wxICON_ERROR|wxCENTRE).ShowModal();
 
 }
 
 /* Creates and displays an info dialog */
 void CMealCalculatorFrame::showInfo(std::string message)
 {
-	wxMessageDialog(nullptr, message, "Information", wxICON_INFORMATION).ShowModal();
+	wxMessageDialog(nullptr, message, "Information", wxICON_INFORMATION|wxCENTRE).ShowModal();
 
 }
 
@@ -208,6 +296,12 @@ void CMealCalculatorFrame::addListBoxEntry(std::string entry)
 /* Gets the Meal's nutrition and displays it in the Meal Nutrition Frame */
 void CMealCalculatorFrame::calculate(wxEvent & event)
 {
+	if (meal->getIngredientCount() <= 0)
+	{
+		showError("The meal must have at least one ingredient");
+		return;
+	}
+
 	mealNutritionFrame = new CMealNutritionFrame(this);
 
 	mealNutritionFrame->setCalories(meal->getCaloriesPer100g());
@@ -234,7 +328,7 @@ float CMealCalculatorFrame::getGrams()
 	{
 		iGrams = std::stof(sGrams);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -251,7 +345,7 @@ float CMealCalculatorFrame::getCalories()
 	{
 		iCalories = std::stof(sCalories);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -268,7 +362,7 @@ float CMealCalculatorFrame::getFat()
 	{
 		iFat = std::stof(sFat);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -285,7 +379,7 @@ float CMealCalculatorFrame::getCarbohydrates()
 	{
 		iCarbohydrates = std::stof(sCarbohydrates);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 
@@ -302,7 +396,7 @@ float CMealCalculatorFrame::getProtein()
 	{
 		iProtein = std::stof(sProtein);
 	}
-	catch (const std::invalid_argument& ia)
+	catch (const std::invalid_argument&)
 	{
 	}
 

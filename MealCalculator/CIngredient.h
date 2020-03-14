@@ -1,4 +1,5 @@
 #include <string>
+#include <fstream>
 
 #pragma once
 
@@ -24,6 +25,12 @@ public:
 	float getCarbohydratesPer100g();
 	float getProteinPer100g();
 
+	std::string getGramsString();
+	std::string getCaloriesPer100gString();
+	std::string getFatPer100gString();
+	std::string getCarbohydratesPer100gString();
+	std::string getProteinPer100gString();
+
 	float getTotalCalories();
 	float getTotalFat();
 	float getTotalCarbohydrates();
@@ -34,6 +41,9 @@ public:
 	void setFatPer100g(float fat);
 	void setCarbohydratesPer100g(float carbohydrates);
 	void setProteinPer100g(float protein);
+
+	void saveToFile(std::string path);
+	static CIngredient* loadFromFile(std::string path);
 
 private:
 	std::string name;

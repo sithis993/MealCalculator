@@ -190,6 +190,34 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	NewIngredientButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("New Ingredient"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer6->Add( NewIngredientButton, 0, wxALL|wxEXPAND, 5 );
 
+	LoadIngredientFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Load Ingredient"), wxT("*.ing"), wxDefaultPosition, wxDefaultSize, wxFLP_OPEN );
+	sbSizer6->Add( LoadIngredientFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	SaveIngredientFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Save Ingredient"), wxT("*.ing"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
+	sbSizer6->Add( SaveIngredientFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticline1 = new wxStaticLine( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	sbSizer6->Add( m_staticline1, 0, wxEXPAND | wxALL, 5 );
+
+	NewMealButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("New Meal"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer6->Add( NewMealButton, 0, wxALL|wxEXPAND, 5 );
+
+	LoadMealFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Load Meal"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
+	LoadMealFilePicker->Enable( false );
+
+	sbSizer6->Add( LoadMealFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	SaveMealFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Save Meal"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
+	SaveMealFilePicker->Enable( false );
+
+	sbSizer6->Add( SaveMealFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticline2 = new wxStaticLine( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	sbSizer6->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
+
+
+	sbSizer6->Add( 0, 0, 1, wxEXPAND, 5 );
+
 	CalculateButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Calculate"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer6->Add( CalculateButton, 0, wxALL|wxEXPAND, 5 );
 
@@ -336,5 +364,65 @@ MealNutritionFrame::MealNutritionFrame( wxWindow* parent, wxWindowID id, const w
 }
 
 MealNutritionFrame::~MealNutritionFrame()
+{
+}
+
+ConfirmationDialog::ConfirmationDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+	wxBoxSizer* bSizer28;
+	bSizer28 = new wxBoxSizer( wxVERTICAL );
+
+	MainPanel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer30;
+	bSizer30 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer29;
+	bSizer29 = new wxBoxSizer( wxVERTICAL );
+
+
+	bSizer29->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	DialogStaticText = new wxStaticText( MainPanel, wxID_ANY, wxT("Message here"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER_HORIZONTAL );
+	DialogStaticText->Wrap( 100 );
+	bSizer29->Add( DialogStaticText, 0, wxALL|wxEXPAND, 10 );
+
+
+	bSizer29->Add( 0, 0, 1, wxEXPAND, 5 );
+
+
+	bSizer30->Add( bSizer29, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer33;
+	bSizer33 = new wxBoxSizer( wxHORIZONTAL );
+
+
+	bSizer33->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	OkButton = new wxButton( MainPanel, wxID_ANY, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer33->Add( OkButton, 0, wxALL, 5 );
+
+	CancelButton = new wxButton( MainPanel, wxID_ANY, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer33->Add( CancelButton, 0, wxALL, 5 );
+
+
+	bSizer30->Add( bSizer33, 1, wxALIGN_RIGHT, 5 );
+
+
+	MainPanel->SetSizer( bSizer30 );
+	MainPanel->Layout();
+	bSizer30->Fit( MainPanel );
+	bSizer28->Add( MainPanel, 0, wxEXPAND | wxALL, 5 );
+
+
+	this->SetSizer( bSizer28 );
+	this->Layout();
+	bSizer28->Fit( this );
+
+	this->Centre( wxBOTH );
+}
+
+ConfirmationDialog::~ConfirmationDialog()
 {
 }

@@ -24,7 +24,10 @@
 #include <wx/button.h>
 #include <wx/panel.h>
 #include <wx/textctrl.h>
+#include <wx/filepicker.h>
+#include <wx/statline.h>
 #include <wx/frame.h>
+#include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -59,11 +62,18 @@ class MealCalculatorFrame : public wxFrame
 		wxButton* IngredientButton;
 		wxPanel* MealActionsPanel;
 		wxButton* NewIngredientButton;
+		wxFilePickerCtrl* LoadIngredientFilePicker;
+		wxFilePickerCtrl* SaveIngredientFilePicker;
+		wxStaticLine* m_staticline1;
+		wxButton* NewMealButton;
+		wxFilePickerCtrl* LoadMealFilePicker;
+		wxFilePickerCtrl* SaveMealFilePicker;
+		wxStaticLine* m_staticline2;
 		wxButton* CalculateButton;
 
 	public:
 
-		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 558,370 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 556,354 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~MealCalculatorFrame();
 
@@ -94,6 +104,26 @@ class MealNutritionFrame : public wxFrame
 		MealNutritionFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Nutrition"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 422,182 ), long style = wxDEFAULT_FRAME_STYLE|wxFRAME_FLOAT_ON_PARENT|wxTAB_TRAVERSAL );
 
 		~MealNutritionFrame();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class ConfirmationDialog
+///////////////////////////////////////////////////////////////////////////////
+class ConfirmationDialog : public wxDialog
+{
+	private:
+
+	protected:
+		wxPanel* MainPanel;
+		wxStaticText* DialogStaticText;
+		wxButton* OkButton;
+		wxButton* CancelButton;
+
+	public:
+
+		ConfirmationDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Are you sure?"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP );
+		~ConfirmationDialog();
 
 };
 
