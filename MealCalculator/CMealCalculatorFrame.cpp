@@ -296,6 +296,12 @@ void CMealCalculatorFrame::addListBoxEntry(std::string entry)
 /* Gets the Meal's nutrition and displays it in the Meal Nutrition Frame */
 void CMealCalculatorFrame::calculate(wxEvent & event)
 {
+	if (meal->getIngredientCount() <= 0)
+	{
+		showError("The meal must have at least one ingredient");
+		return;
+	}
+
 	mealNutritionFrame = new CMealNutritionFrame(this);
 
 	mealNutritionFrame->setCalories(meal->getCaloriesPer100g());

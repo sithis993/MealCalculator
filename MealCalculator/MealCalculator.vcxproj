@@ -133,6 +133,7 @@
     <ClInclude Include="CMealCalculator.h" />
     <ClInclude Include="CMealCalculatorFrame.h" />
     <ClInclude Include="CMealNutritionFrame.h" />
+    <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbsGui.cpp" />
