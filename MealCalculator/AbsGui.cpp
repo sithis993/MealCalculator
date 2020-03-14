@@ -190,6 +190,30 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	NewIngredientButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("New Ingredient"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer6->Add( NewIngredientButton, 0, wxALL|wxEXPAND, 5 );
 
+	LoadIngredientFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Load Ingredient"), wxT("*.ing"), wxDefaultPosition, wxDefaultSize, wxFLP_OPEN );
+	sbSizer6->Add( LoadIngredientFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	SaveIngredientFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Save Ingredient"), wxT("*.ing"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
+	sbSizer6->Add( SaveIngredientFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticline1 = new wxStaticLine( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	sbSizer6->Add( m_staticline1, 0, wxEXPAND | wxALL, 5 );
+
+	NewMealButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("New Meal"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer6->Add( NewMealButton, 0, wxALL|wxEXPAND, 5 );
+
+	LoadMealFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Load Meal"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
+	sbSizer6->Add( LoadMealFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	SaveMealFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Save Meal"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
+	sbSizer6->Add( SaveMealFilePicker, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticline2 = new wxStaticLine( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	sbSizer6->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
+
+
+	sbSizer6->Add( 0, 0, 1, wxEXPAND, 5 );
+
 	CalculateButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Calculate"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer6->Add( CalculateButton, 0, wxALL|wxEXPAND, 5 );
 

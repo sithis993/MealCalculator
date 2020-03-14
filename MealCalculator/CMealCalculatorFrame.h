@@ -19,10 +19,15 @@ private:
 
 private:
 	void setEvents();
+	void updateVisuals();
 	void addIngredient(wxEvent& event);
 	void removeIngredient(wxEvent& event);
 	void clearIngredientTextCtrls();
+	CIngredient* getCurrentIngredient();
 	void newIngredient(wxEvent& event);
+	void loadIngredient(wxEvent& event);
+	void saveIngredient(wxEvent& event);
+	void newMeal(wxEvent& event);
 	void selectIngredient(wxEvent& event);
 	void updateIngredientButton(wxEvent& event);
 	void showError(std::string message);

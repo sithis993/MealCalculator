@@ -24,6 +24,8 @@
 #include <wx/button.h>
 #include <wx/panel.h>
 #include <wx/textctrl.h>
+#include <wx/filepicker.h>
+#include <wx/statline.h>
 #include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -59,11 +61,18 @@ class MealCalculatorFrame : public wxFrame
 		wxButton* IngredientButton;
 		wxPanel* MealActionsPanel;
 		wxButton* NewIngredientButton;
+		wxFilePickerCtrl* LoadIngredientFilePicker;
+		wxFilePickerCtrl* SaveIngredientFilePicker;
+		wxStaticLine* m_staticline1;
+		wxButton* NewMealButton;
+		wxFilePickerCtrl* LoadMealFilePicker;
+		wxFilePickerCtrl* SaveMealFilePicker;
+		wxStaticLine* m_staticline2;
 		wxButton* CalculateButton;
 
 	public:
 
-		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 558,370 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 556,354 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~MealCalculatorFrame();
 

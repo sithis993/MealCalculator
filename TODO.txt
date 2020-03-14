@@ -1,6 +1,5 @@
 TODO
 ----------------
-- Host project on Github and determine how/if we can use docker to solve problem of wxwidgets dependency
 - Implement Meal save and load capabilities
 - Implement saving and loading of individual ingredients
 	+ Ship with a base set of ingredients

@@ -50,6 +50,12 @@ void CMeal::removeIngredient(std::string ingredientName)
 	ingredients.erase(ingredients.begin() + position);
 }
 
+void CMeal::removeAllIngredients()
+{
+	ingredients.clear();
+
+}
+
 /* Gets the Meal ingredient specified */
 CIngredient* CMeal::getIngredient(std::string ingredientName)
 {
