@@ -211,7 +211,7 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	LoadMealFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Load Meal"), wxT("meal (*.meal)|*.meal"), wxDefaultPosition, wxDefaultSize, wxFLP_FILE_MUST_EXIST|wxFLP_OPEN );
 	sbSizer6->Add( LoadMealFilePicker, 0, wxALL|wxEXPAND, 5 );
 
-	SaveMealFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Save Meal"), wxT("*.meal"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
+	SaveMealFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Save Meal"), wxT("meal (*.meal)|*.meal"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE );
 	sbSizer6->Add( SaveMealFilePicker, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticline2 = new wxStaticLine( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
