@@ -1,4 +1,5 @@
 #include <vector>
+#include <fstream>
 #include "CIngredient.h"
 
 #pragma once
@@ -16,6 +17,7 @@ public:
 	void removeIngredient(std::string ingredientName);
 	void removeAllIngredients();
 	CIngredient* getIngredient(std::string ingredientName);
+	std::vector<CIngredient>* getIngredients();
 
 	size_t getIngredientCount();
 	float getTotalWeightGrams();
@@ -28,7 +30,9 @@ public:
 	float getFatPer100g();
 	float getCarbohydratesPer100g();
 	float getProteinPer100g();
-	// TODO implement per 100g methods for carbs and protein
+
+	void saveToFile(std::string path);
+	void loadFromFile(std::string path);
 
 private:
 	std::vector<CIngredient> ingredients;

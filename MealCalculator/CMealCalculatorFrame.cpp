@@ -33,6 +33,8 @@ void CMealCalculatorFrame::setEvents()
 	SaveIngredientFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::saveIngredient, this);
 
 	NewMealButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::newMeal, this);
+	LoadMealFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::loadMeal, this);
+	SaveMealFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::saveMeal, this);
 }
 
 /* Make any GUI changes */
@@ -220,6 +222,27 @@ void CMealCalculatorFrame::newMeal(wxEvent& event)
 	IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
 	newIngredient(event);
 	
+}
+
+/* Loads a meal file from disk */
+void CMealCalculatorFrame::loadMeal(wxEvent& event)
+{
+	meal->loadFromFile(LoadMealFilePicker->GetPath().ToStdString());
+	MealIngredientsListBox->Clear();
+	clearIngredientTextCtrls();
+
+	for (CIngredient ingredient : *(meal->getIngredients()))
+	{
+		addListBoxEntry(ingredient.getName());
+	}
+
+}
+
+/* Saves the meal to disk */
+void CMealCalculatorFrame::saveMeal(wxEvent& event)
+{
+	meal->saveToFile(SaveMealFilePicker->GetPath().ToStdString());
+	showInfo("Meal saved");
 }
 
 

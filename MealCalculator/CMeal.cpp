@@ -70,6 +70,11 @@ CIngredient* CMeal::getIngredient(std::string ingredientName)
 	return nullptr;
 }
 
+std::vector<CIngredient>* CMeal::getIngredients()
+{
+	return &ingredients;
+}
+
 /* Gets the count of Meal Ingredients */
 size_t CMeal::getIngredientCount()
 {
@@ -191,6 +196,61 @@ float CMeal::getProteinPer100g()
 	}
 
 	return protein;
+}
+
+/* Saves the Meal to disk */
+void CMeal::saveToFile(std::string path)
+{
+	std::ofstream out(path);
+
+	for (CIngredient ingredient : ingredients)
+	{
+		out << ingredient.getName() << "\n";
+		out << ingredient.getGrams() << "\n";
+		out << ingredient.getCaloriesPer100g() << "\n";
+		out << ingredient.getFatPer100g() << "\n";
+		out << ingredient.getCarbohydratesPer100g() << "\n";
+		out << ingredient.getProteinPer100g() << "\n";
+	}
+
+	out.close();
+}
+
+/* Loads a Meal from disk */
+void CMeal::loadFromFile(std::string path)
+{
+	std::ifstream in(path);
+	std::string buffer;
+	std::vector<CIngredient> newIngredients;
+
+	std::string name;
+	float grams;
+	float caloriesPer100g;
+	float fatPer100g;
+	float carbohydratesPer100g;
+	float proteinPer100g;
+
+	while (in.peek() != EOF)
+	{
+		in >> name;
+		in >> grams;
+		in >> caloriesPer100g;
+		in >> fatPer100g;
+		in >> carbohydratesPer100g;
+		in >> proteinPer100g;
+
+		CIngredient ingredient = CIngredient(
+			name, grams,
+			caloriesPer100g, fatPer100g,
+			carbohydratesPer100g, proteinPer100g
+		);
+
+		newIngredients.push_back(ingredient);
+	}
+
+	this->ingredients = newIngredients;
+
+	in.close();
 }
 
 
