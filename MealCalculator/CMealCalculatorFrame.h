@@ -27,14 +27,18 @@ private:
 	void removeIngredient(wxEvent& event);
 	void clearIngredientTextCtrls();
 	CIngredient* getCurrentIngredient();
-	void newIngredient(wxEvent& event);
-	void loadIngredient(wxEvent& event);
-	void saveIngredient(wxEvent& event);
-	void newMeal(wxEvent& event);
 	void selectIngredient(wxEvent& event);
 	void updateIngredientButton(wxEvent& event);
 	void showError(std::string message);
 	void showInfo(std::string message);
+
+	void newIngredient(wxEvent& event);
+	void loadIngredient(wxEvent& event);
+	void saveIngredient(wxEvent& event);
+
+	void newMeal(wxEvent& event);
+	void loadMeal(wxEvent& event);
+	void saveMeal(wxEvent& event);
 
 	void addListBoxEntry(std::string);
 	void calculate(wxEvent& event);
