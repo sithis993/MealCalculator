@@ -61,11 +61,11 @@ class MealCalculatorFrame : public wxFrame
 		wxTextCtrl* IngredientProteinTextCtrl;
 		wxButton* IngredientButton;
 		wxPanel* MealActionsPanel;
-		wxButton* NewIngredientButton;
+		wxButton* ResetIngredientButton;
 		wxFilePickerCtrl* LoadIngredientFilePicker;
 		wxFilePickerCtrl* SaveIngredientFilePicker;
 		wxStaticLine* m_staticline1;
-		wxButton* NewMealButton;
+		wxButton* ResetMealButton;
 		wxFilePickerCtrl* LoadMealFilePicker;
 		wxFilePickerCtrl* SaveMealFilePicker;
 		wxStaticLine* m_staticline2;

@@ -32,11 +32,11 @@ private:
 	void showError(std::string message);
 	void showInfo(std::string message);
 
-	void newIngredient(wxEvent& event);
+	void resetIngredient(wxEvent& event);
 	void loadIngredient(wxEvent& event);
 	void saveIngredient(wxEvent& event);
 
-	void newMeal(wxEvent& event);
+	void resetMeal(wxEvent& event);
 	void loadMeal(wxEvent& event);
 	void saveMeal(wxEvent& event);
 
