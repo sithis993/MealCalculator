@@ -28,11 +28,11 @@ void CMealCalculatorFrame::setEvents()
 	IngredientNameTextCtrl->Bind(wxEVT_TEXT, &CMealCalculatorFrame::updateIngredientButton, this);
 	CalculateButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::calculate, this);
 
-	NewIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::newIngredient, this);
+	ResetIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::resetIngredient, this);
 	LoadIngredientFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::loadIngredient, this);
 	SaveIngredientFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::saveIngredient, this);
 
-	NewMealButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::newMeal, this);
+	ResetMealButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::resetMeal, this);
 	LoadMealFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::loadMeal, this);
 	SaveMealFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::saveMeal, this);
 }
@@ -169,9 +169,16 @@ CIngredient* CMealCalculatorFrame::getCurrentIngredient()
 }
 
 
-/* Clears all ingredient Text Ctrls making it easier to add/create a new ingredient */
-void CMealCalculatorFrame::newIngredient(wxEvent & event)
+/* Clears all ingredient Text Ctrls */
+void CMealCalculatorFrame::resetIngredient(wxEvent & event)
 {
+	confirmationDialog = new CConfirmationDialog(this, "Any unsaved information for this ingredient will be lost");
+	confirmationDialog->Center(wxBOTH);
+	confirmationDialog->ShowModal();
+
+	if (!confirmationDialog->wasConfirmed())
+		return;
+
 	clearIngredientTextCtrls();
 
 	IngredientNameTextCtrl->SetFocus();
@@ -185,7 +192,10 @@ void CMealCalculatorFrame::loadIngredient(wxEvent& event)
 	// isn't an ingredient
 	CIngredient* ingredient = CIngredient::loadFromFile(LoadIngredientFilePicker->GetPath().ToStdString());
 	if (!ingredient)
+	{
+		showError("The ingredient file could not be loaded. The data may be malformed or corrupted");
 		return;
+	}
 
 	// Set Text Ctrl values
 	IngredientNameTextCtrl->SetValue(ingredient->getName());
@@ -208,7 +218,7 @@ void CMealCalculatorFrame::saveIngredient(wxEvent& event)
 }
 
 /* Clears all current meal ingredients and resets the ingredient form*/
-void CMealCalculatorFrame::newMeal(wxEvent& event)
+void CMealCalculatorFrame::resetMeal(wxEvent& event)
 {
 	confirmationDialog = new CConfirmationDialog(this, "All ingredients will be removed and any unsaved changes will be lost");
 	confirmationDialog->Center(wxBOTH);
@@ -220,7 +230,7 @@ void CMealCalculatorFrame::newMeal(wxEvent& event)
 	meal->removeAllIngredients();
 	MealIngredientsListBox->Clear();
 	IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
-	newIngredient(event);
+	resetIngredient(event);
 	
 }
 

@@ -9,6 +9,8 @@ TODO
 	
 DONE
 -----------------
+- Added confirmation popup for "Reset Ingredient"
+- Changed "New Ingredient" and "New Meal" to "Reset Ingredient" and "Reset Meal"
 - Created a version file for holding version number and included this version no in the form title
 - Verified that char array cannot be overflowed
 - Fixed warning for unused exception variables
