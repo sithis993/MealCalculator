@@ -1,8 +1,9 @@
 TODO
 ----------------
-- Implement Meal save and load capabilities
+- Add exception handling for invalid meal/ingredient files during load
 - Ship with a base set of ingredients
 - Allow ingredient brands to be specified
+- Create icon for program
 - Think about some location to host Meal Calc that can be accessed anywhere/by anyone
 	+ Host binary download on GitHub
 	
