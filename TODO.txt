@@ -9,6 +9,9 @@ TODO
 	
 DONE
 -----------------
+- Adjusted New Meal button to not prompt when resetting the ingredient text ctrls
+- Changd Reset Ingredient back to "New Ingredient"
+- Fixed issue with loading ingredients containing spaces
 - Added confirmation popup for "Reset Ingredient"
 - Changed "New Ingredient" and "New Meal" to "Reset Ingredient" and "Reset Meal"
 - Created a version file for holding version number and included this version no in the form title
