@@ -193,8 +193,8 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 	wxStaticBoxSizer* sbSizer6;
 	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( MealActionsPanel, wxID_ANY, wxT("Meal Actions") ), wxVERTICAL );
 
-	ResetIngredientButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Reset Ingredient"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer6->Add( ResetIngredientButton, 0, wxALL|wxEXPAND, 5 );
+	NewIngredientButton = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("New Ingredient"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer6->Add( NewIngredientButton, 0, wxALL|wxEXPAND, 5 );
 
 	LoadIngredientFilePicker = new wxFilePickerCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxT("Load Ingredient"), wxT("*.ing"), wxDefaultPosition, wxDefaultSize, wxFLP_OPEN );
 	sbSizer6->Add( LoadIngredientFilePicker, 0, wxALL|wxEXPAND, 5 );

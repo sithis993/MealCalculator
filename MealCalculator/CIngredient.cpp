@@ -9,9 +9,7 @@ CIngredient::CIngredient(std::string name, float grams, float calories,
 	this->fatPer100g = fat;
 	this->carbohydratesPer100g = carbohydrates;
 	this->proteinPer100g = protein;
-
 }
-
 
 CIngredient::~CIngredient()
 {
@@ -167,21 +165,21 @@ CIngredient* CIngredient::loadFromFile(std::string path)
 	std::ifstream in(path);
 
 	std::string name;
-	float caloriesPer100g;
-	float fatPer100g;
-	float carbohydratesPer100g;
-	float proteinPer100g;
+	std::string caloriesPer100g;
+	std::string fatPer100g;
+	std::string carbohydratesPer100g;
+	std::string proteinPer100g;
 
-	in >> name;
-	in >> caloriesPer100g;
-	in >> fatPer100g;
-	in >> carbohydratesPer100g;
-	in >> proteinPer100g;
+	std::getline(in, name);
+	std::getline(in, caloriesPer100g);
+	std::getline(in, fatPer100g);
+	std::getline(in, carbohydratesPer100g);
+	std::getline(in, proteinPer100g);
 
 	CIngredient* ingredient = new CIngredient(
 		name, 0.0, 
-		caloriesPer100g, fatPer100g, 
-		carbohydratesPer100g, proteinPer100g
+		std::stof(caloriesPer100g), std::stof(fatPer100g), 
+		std::stof(carbohydratesPer100g), std::stof(proteinPer100g)
 	);
 
 	return ingredient;

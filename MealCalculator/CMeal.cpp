@@ -224,25 +224,25 @@ void CMeal::loadFromFile(std::string path)
 	std::vector<CIngredient> newIngredients;
 
 	std::string name;
-	float grams;
-	float caloriesPer100g;
-	float fatPer100g;
-	float carbohydratesPer100g;
-	float proteinPer100g;
+	std::string grams;
+	std::string caloriesPer100g;
+	std::string fatPer100g;
+	std::string carbohydratesPer100g;
+	std::string proteinPer100g;
 
 	while (in.peek() != EOF)
 	{
-		in >> name;
-		in >> grams;
-		in >> caloriesPer100g;
-		in >> fatPer100g;
-		in >> carbohydratesPer100g;
-		in >> proteinPer100g;
+		std::getline(in, name);
+		std::getline(in, grams);
+		std::getline(in, caloriesPer100g);
+		std::getline(in, fatPer100g);
+		std::getline(in, carbohydratesPer100g);
+		std::getline(in, proteinPer100g);
 
 		CIngredient ingredient = CIngredient(
-			name, grams,
-			caloriesPer100g, fatPer100g,
-			carbohydratesPer100g, proteinPer100g
+			name, std::stof(grams),
+			std::stof(caloriesPer100g), std::stof(fatPer100g),
+			std::stof(carbohydratesPer100g), std::stof(proteinPer100g)
 		);
 
 		newIngredients.push_back(ingredient);

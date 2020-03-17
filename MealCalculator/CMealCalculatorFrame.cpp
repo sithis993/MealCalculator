@@ -28,7 +28,7 @@ void CMealCalculatorFrame::setEvents()
 	IngredientNameTextCtrl->Bind(wxEVT_TEXT, &CMealCalculatorFrame::updateIngredientButton, this);
 	CalculateButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::calculate, this);
 
-	ResetIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::resetIngredient, this);
+	NewIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::newIngredient, this);
 	LoadIngredientFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::loadIngredient, this);
 	SaveIngredientFilePicker->Bind(wxEVT_FILEPICKER_CHANGED, &CMealCalculatorFrame::saveIngredient, this);
 
@@ -170,7 +170,7 @@ CIngredient* CMealCalculatorFrame::getCurrentIngredient()
 
 
 /* Clears all ingredient Text Ctrls */
-void CMealCalculatorFrame::resetIngredient(wxEvent & event)
+void CMealCalculatorFrame::newIngredient(wxEvent & event)
 {
 	confirmationDialog = new CConfirmationDialog(this, "Any unsaved information for this ingredient will be lost");
 	confirmationDialog->Center(wxBOTH);
@@ -230,7 +230,9 @@ void CMealCalculatorFrame::resetMeal(wxEvent& event)
 	meal->removeAllIngredients();
 	MealIngredientsListBox->Clear();
 	IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
-	resetIngredient(event);
+
+	clearIngredientTextCtrls();
+	IngredientNameTextCtrl->SetFocus();
 	
 }
 
