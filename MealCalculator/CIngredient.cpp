@@ -9,9 +9,7 @@ CIngredient::CIngredient(std::string name, float grams, float calories,
 	this->fatPer100g = fat;
 	this->carbohydratesPer100g = carbohydrates;
 	this->proteinPer100g = protein;
-
 }
-
 
 CIngredient::~CIngredient()
 {
