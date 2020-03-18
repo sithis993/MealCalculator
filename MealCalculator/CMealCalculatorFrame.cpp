@@ -76,6 +76,7 @@ void CMealCalculatorFrame::addIngredient(wxEvent & event)
 	{
 		CIngredient* oldIngredient = meal->getIngredient(newIngredient->getName());
 		oldIngredient->setGrams(newIngredient->getGrams());
+		oldIngredient->setBrand(newIngredient->getBrand());
 		oldIngredient->setCaloriesPer100g(newIngredient->getCaloriesPer100g());
 		oldIngredient->setFatPer100g(newIngredient->getFatPer100g());
 		oldIngredient->setCarbohydratesPer100g(newIngredient->getCarbohydratesPer100g());
@@ -115,6 +116,7 @@ void CMealCalculatorFrame::removeIngredient(wxEvent & event)
 void CMealCalculatorFrame::clearIngredientTextCtrls()
 {
 	IngredientNameTextCtrl->Clear();
+	IngredientBrandTextCtrl1->Clear();
 	IngredientGramsTextCtrl->Clear();
 	IngredientCaloriesTextCtrl->Clear();
 	IngredientFatTextCtrl->Clear();
@@ -129,6 +131,7 @@ CIngredient* CMealCalculatorFrame::getCurrentIngredient()
 
 	// Get field data
 	std::string name = getName();
+	std::string brand = getBrand();
 	float grams = getGrams();
 	float calories = getCalories();
 	float fat = getFat();
@@ -158,6 +161,7 @@ CIngredient* CMealCalculatorFrame::getCurrentIngredient()
 
 	ingredient = new CIngredient(
 		name,
+		brand,
 		grams,
 		calories,
 		fat,
@@ -204,6 +208,7 @@ void CMealCalculatorFrame::loadIngredient(wxEvent& event)
 	// Set Text Ctrl values
 	clearIngredientTextCtrls();
 	IngredientNameTextCtrl->SetValue(ingredient->getName());
+	IngredientBrandTextCtrl1->SetValue(ingredient->getBrand());
 	IngredientCaloriesTextCtrl->SetValue(ingredient->getCaloriesPer100gString());
 	IngredientFatTextCtrl->SetValue(ingredient->getFatPer100gString());
 	IngredientCarbohydratesTextCtrl->SetValue(ingredient->getCarbohydratesPer100gString());
@@ -286,6 +291,9 @@ void CMealCalculatorFrame::selectIngredient(wxEvent & event)
 	// Name
 	IngredientNameTextCtrl->SetValue(ingredient->getName());
 
+	// Brand
+	IngredientBrandTextCtrl1->SetValue(ingredient->getBrand());
+
 	// Grams
 	sprintf(stringBuffer, "%.2f", ingredient->getGrams());
 	IngredientGramsTextCtrl->SetValue(std::string(stringBuffer));
@@ -366,6 +374,12 @@ void CMealCalculatorFrame::calculate(wxEvent & event)
 std::string CMealCalculatorFrame::getName()
 {
 	return IngredientNameTextCtrl->GetValue().ToStdString();
+}
+
+/* Get the current value of the Ingredient Brand TextCtrl */
+std::string CMealCalculatorFrame::getBrand()
+{
+	return IngredientBrandTextCtrl1->GetValue().ToStdString();
 }
 
 /* Gets the current value of the Ingredient Grams TextCtrl */
