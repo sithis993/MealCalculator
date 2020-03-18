@@ -188,21 +188,27 @@ void CMealCalculatorFrame::newIngredient(wxEvent & event)
 /* Loads an ingredient from a file */
 void CMealCalculatorFrame::loadIngredient(wxEvent& event)
 {
-	// TODO Add exception/error handling when user tries to load a file that 
-	// isn't an ingredient
-	CIngredient* ingredient = CIngredient::loadFromFile(LoadIngredientFilePicker->GetPath().ToStdString());
-	if (!ingredient)
+	// TODO clear all fields before loading
+	CIngredient* ingredient;
+
+	try
+	{ 
+		ingredient = CIngredient::loadFromFile(LoadIngredientFilePicker->GetPath().ToStdString());
+	}
+	catch (const std::invalid_argument&)
 	{
-		showError("The ingredient file could not be loaded. The data may be malformed or corrupted");
+		showError("The Ingredient file could not be loaded. The file contains malformed data or may be corrupted");
 		return;
 	}
 
 	// Set Text Ctrl values
+	clearIngredientTextCtrls();
 	IngredientNameTextCtrl->SetValue(ingredient->getName());
 	IngredientCaloriesTextCtrl->SetValue(ingredient->getCaloriesPer100gString());
 	IngredientFatTextCtrl->SetValue(ingredient->getFatPer100gString());
 	IngredientCarbohydratesTextCtrl->SetValue(ingredient->getCarbohydratesPer100gString());
 	IngredientProteinTextCtrl->SetValue(ingredient->getProteinPer100gString());
+	IngredientGramsTextCtrl->SetFocus();
 	
 }
 
@@ -239,7 +245,16 @@ void CMealCalculatorFrame::resetMeal(wxEvent& event)
 /* Loads a meal file from disk */
 void CMealCalculatorFrame::loadMeal(wxEvent& event)
 {
-	meal->loadFromFile(LoadMealFilePicker->GetPath().ToStdString());
+	try
+	{ 
+		meal->loadFromFile(LoadMealFilePicker->GetPath().ToStdString());
+	}
+	catch (const std::invalid_argument&)
+	{
+		showError("The Meal file could not be loaded. The file contains malformed data or may be corrupted");
+		return;
+	}
+
 	MealIngredientsListBox->Clear();
 	clearIngredientTextCtrls();
 

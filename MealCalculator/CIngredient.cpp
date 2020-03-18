@@ -177,8 +177,8 @@ CIngredient* CIngredient::loadFromFile(std::string path)
 	std::getline(in, proteinPer100g);
 
 	CIngredient* ingredient = new CIngredient(
-		name, 0.0, 
-		std::stof(caloriesPer100g), std::stof(fatPer100g), 
+		name, 0.0,
+		std::stof(caloriesPer100g), std::stof(fatPer100g),
 		std::stof(carbohydratesPer100g), std::stof(proteinPer100g)
 	);
 
