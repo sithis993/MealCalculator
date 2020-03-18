@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbsGui.h"
+#include "resource.h"
 
 #include "CMeal.h"
 #include "CIngredient.h"
