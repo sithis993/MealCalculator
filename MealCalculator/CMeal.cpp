@@ -206,6 +206,7 @@ void CMeal::saveToFile(std::string path)
 	for (CIngredient ingredient : ingredients)
 	{
 		out << ingredient.getName() << "\n";
+		out << ingredient.getBrand() << "\n";
 		out << ingredient.getGrams() << "\n";
 		out << ingredient.getCaloriesPer100g() << "\n";
 		out << ingredient.getFatPer100g() << "\n";
@@ -224,6 +225,7 @@ void CMeal::loadFromFile(std::string path)
 	std::vector<CIngredient> newIngredients;
 
 	std::string name;
+	std::string brand;
 	std::string grams;
 	std::string caloriesPer100g;
 	std::string fatPer100g;
@@ -233,6 +235,7 @@ void CMeal::loadFromFile(std::string path)
 	while (in.peek() != EOF)
 	{
 		std::getline(in, name);
+		std::getline(in, brand);
 		std::getline(in, grams);
 		std::getline(in, caloriesPer100g);
 		std::getline(in, fatPer100g);
@@ -240,7 +243,8 @@ void CMeal::loadFromFile(std::string path)
 		std::getline(in, proteinPer100g);
 
 		CIngredient ingredient = CIngredient(
-			name, std::stof(grams),
+			name, brand, 
+			std::stof(grams),
 			std::stof(caloriesPer100g), std::stof(fatPer100g),
 			std::stof(carbohydratesPer100g), std::stof(proteinPer100g)
 		);
