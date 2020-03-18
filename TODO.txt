@@ -1,7 +1,6 @@
 TODO
 ----------------
-- Add exception handling for invalid meal/ingredient files during load
-- Ship with a base set of ingredients
+- Ship with a base set of ingredients (classes?)
 - Allow ingredient brands to be specified
 - Create icon for program
 - Think about some location to host Meal Calc that can be accessed anywhere/by anyone
@@ -9,6 +8,10 @@ TODO
 	
 DONE
 -----------------
+- Implemented meal and ingredient load exception/error handling for bad file contents
+Adjusted ingredient load to set focus on the Ingredient Grams text ctrl
+- Corrected issue when loading an ingredient from a file the ingredient text controls contained data form another ingredient
+	+ All text controls were cleared, but the Grams Text Ctrl would be left with the grams from the previous ingredient
 - Adjusted New Meal button to not prompt when resetting the ingredient text ctrls
 - Changd Reset Ingredient back to "New Ingredient"
 - Fixed issue with loading ingredients containing spaces
