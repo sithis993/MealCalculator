@@ -133,6 +133,7 @@
     <ClInclude Include="CMealCalculator.h" />
     <ClInclude Include="CMealCalculatorFrame.h" />
     <ClInclude Include="CMealNutritionFrame.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,13 @@
     <ClCompile Include="CMealCalculator.cpp" />
     <ClCompile Include="CMealCalculatorFrame.cpp" />
     <ClCompile Include="CMealNutritionFrame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\oven.ico" />
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
