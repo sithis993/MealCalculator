@@ -82,6 +82,22 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 
 	IngredientDetailsSizer->Add( bSizer61, 1, wxEXPAND, 5 );
 
+	wxBoxSizer* bSizer81;
+	bSizer81 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticText31 = new wxStaticText( IngredientDetailsSizer->GetStaticBox(), wxID_ANY, wxT("Brand"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	bSizer81->Add( m_staticText31, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+
+
+	bSizer81->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	IngredientBrandTextCtrl1 = new wxTextCtrl( IngredientDetailsSizer->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer81->Add( IngredientBrandTextCtrl1, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+
+
+	IngredientDetailsSizer->Add( bSizer81, 1, wxEXPAND, 5 );
+
 	wxBoxSizer* bSizer8;
 	bSizer8 = new wxBoxSizer( wxHORIZONTAL );
 
