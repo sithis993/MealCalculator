@@ -40,6 +40,14 @@ void CMealCalculatorFrame::setEvents()
 /* Make any GUI changes */
 void CMealCalculatorFrame::updateVisuals()
 {
+
+	// Set Frame Icon
+	std::stringstream iconImageStr;
+	iconImageStr << "#" << IDI_FRAME_ICON;
+	wxIcon icon;
+	icon.LoadFile(iconImageStr.str().c_str());
+	SetIcon(icon);
+
 	// Load Ingredient Button
 	wxWindow* loadIngredientButtonWindow = FindWindowByLabel("Browse", LoadIngredientFilePicker);
 	loadIngredientButtonWindow->SetLabel("Load Ingredient");
