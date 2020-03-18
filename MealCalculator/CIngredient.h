@@ -8,7 +8,8 @@ class CIngredient
 {
 public:
 	CIngredient(
-		std::string name, 
+		std::string name,
+		std::string brand,
 		float grams, 
 		float calories, 
 		float fat,
@@ -19,6 +20,7 @@ public:
 
 public:
 	std::string getName();
+	std::string getBrand();
 	float getGrams();
 	float getCaloriesPer100g();
 	float getFatPer100g();
@@ -36,6 +38,7 @@ public:
 	float getTotalCarbohydrates();
 	float getTotalProtein();
 
+	void setBrand(std::string brand);
 	void setGrams(float grams);
 	void setCaloriesPer100g(float calories);
 	void setFatPer100g(float fat);
@@ -47,6 +50,7 @@ public:
 
 private:
 	std::string name;
+	std::string brand;
 	float grams;
 	float caloriesPer100g;
 	float fatPer100g;

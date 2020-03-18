@@ -44,6 +44,7 @@ private:
 	void calculate(wxEvent& event);
 
 	std::string getName();
+	std::string getBrand();
 	float getGrams();
 	float getCalories();
 	float getFat();

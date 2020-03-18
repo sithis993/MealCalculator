@@ -1,9 +1,10 @@
 #include "CIngredient.h"
 
-CIngredient::CIngredient(std::string name, float grams, float calories,
+CIngredient::CIngredient(std::string name, std::string brand, float grams, float calories,
 	float fat, float carbohydrates, float protein)
 {
 	this->name = name;
+	this->brand = brand;
 	this->grams = grams;
 	this->caloriesPer100g = calories;
 	this->fatPer100g = fat;
@@ -19,6 +20,11 @@ CIngredient::~CIngredient()
 std::string CIngredient::getName()
 {
 	return name;
+}
+
+std::string CIngredient::getBrand()
+{
+	return brand;
 }
 
 std::string CIngredient::getGramsString()
@@ -115,6 +121,11 @@ float CIngredient::getTotalProtein()
 	return getProteinPer100g() * (getGrams() / 100);
 }
 
+void CIngredient::setBrand(std::string brand)
+{
+	this->brand = brand;
+}
+
 /* Sets the amount of ingredient grams */
 void CIngredient::setGrams(float grams)
 {
@@ -151,6 +162,7 @@ void CIngredient::saveToFile(std::string path)
 	std::ofstream out(path);
 
 	out << name << "\n";
+	out << brand << "\n";
 	out << caloriesPer100g << "\n" ;
 	out << fatPer100g << "\n" ;
 	out << carbohydratesPer100g << "\n" ;
@@ -165,19 +177,21 @@ CIngredient* CIngredient::loadFromFile(std::string path)
 	std::ifstream in(path);
 
 	std::string name;
+	std::string brand;
 	std::string caloriesPer100g;
 	std::string fatPer100g;
 	std::string carbohydratesPer100g;
 	std::string proteinPer100g;
 
 	std::getline(in, name);
+	std::getline(in, brand);
 	std::getline(in, caloriesPer100g);
 	std::getline(in, fatPer100g);
 	std::getline(in, carbohydratesPer100g);
 	std::getline(in, proteinPer100g);
 
 	CIngredient* ingredient = new CIngredient(
-		name, 0.0,
+		name, brand, 0.0,
 		std::stof(caloriesPer100g), std::stof(fatPer100g),
 		std::stof(carbohydratesPer100g), std::stof(proteinPer100g)
 	);

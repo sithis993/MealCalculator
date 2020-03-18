@@ -49,6 +49,8 @@ class MealCalculatorFrame : public wxFrame
 		wxPanel* IngredientDetailsPanel;
 		wxStaticText* m_staticText1;
 		wxTextCtrl* IngredientNameTextCtrl;
+		wxStaticText* m_staticText31;
+		wxTextCtrl* IngredientBrandTextCtrl1;
 		wxStaticText* m_staticText3;
 		wxTextCtrl* IngredientGramsTextCtrl;
 		wxStaticText* m_staticText13;
