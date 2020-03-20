@@ -1,8 +1,0 @@
-TODO
-----------------
-- Ship with a base set of ingredients (classes?)
-- Create icon for program
-- Investigate Docker usage
-
-DONE
------------------
