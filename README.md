@@ -1,6 +1,8 @@
 # MealCalculator
 A simple Calorie and Macronutrient Meal and Meal Prep Calculator written in C++
 
+Grab the latest release [here](https://github.com/sithis993/MealCalculator/releases/download/0.5.1/MealCalculator.exe)
+
 <p align="center">
   <img src="https://github.com/sithis993/MealCalculator/blob/develop/sample_images/MealCalcultorv051.PNG" height="350">
  </p>
