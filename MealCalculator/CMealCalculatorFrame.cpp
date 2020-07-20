@@ -80,6 +80,7 @@ void CMealCalculatorFrame::addIngredient(wxEvent & event)
 		addListBoxEntry(newIngredient->getName());
 		IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
 		clearIngredientTextCtrls();
+		setStatus("Ingredient added");
 	}
 	else
 	{
@@ -90,6 +91,7 @@ void CMealCalculatorFrame::addIngredient(wxEvent & event)
 		oldIngredient->setFatPer100g(newIngredient->getFatPer100g());
 		oldIngredient->setCarbohydratesPer100g(newIngredient->getCarbohydratesPer100g());
 		oldIngredient->setProteinPer100g(newIngredient->getProteinPer100g());
+		setStatus("Ingredient updated");
 	}
 
 	clearIngredientTextCtrls();
@@ -122,6 +124,8 @@ void CMealCalculatorFrame::removeIngredient(wxEvent & event)
 	MealIngredientsListBox->Delete(selectedItemIndex);
 	IngredientsCountLabel->SetLabelText(std::to_string(meal->getIngredientCount()));
 	clearIngredientTextCtrls();
+
+	setStatus("Ingredient removed");
 
 }
 
@@ -194,6 +198,8 @@ void CMealCalculatorFrame::newIngredient(wxEvent & event)
 
 	IngredientNameTextCtrl->SetFocus();
 	MealIngredientsListBox->DeselectAll();
+
+	setStatus("");
 }
 
 /* Loads an ingredient from a file */
@@ -221,7 +227,8 @@ void CMealCalculatorFrame::loadIngredient(wxEvent& event)
 	IngredientCarbohydratesTextCtrl->SetValue(ingredient->getCarbohydratesPer100gString());
 	IngredientProteinTextCtrl->SetValue(ingredient->getProteinPer100gString());
 	IngredientGramsTextCtrl->SetFocus();
-	
+
+	setStatus("Ingredient loaded");
 }
 
 /* Saves the current ingredient to a file */
@@ -232,7 +239,9 @@ void CMealCalculatorFrame::saveIngredient(wxEvent& event)
 		return;
 
 	ingredient->saveToFile(SaveIngredientFilePicker->GetPath().ToStdString());
-	showInfo("Ingredient '" + ingredient->getName() + "' saved");
+	//showInfo("Ingredient '" + ingredient->getName() + "' saved");
+
+	setStatus("Ingredient saved");
 }
 
 /* Clears all current meal ingredients and resets the ingredient form*/
@@ -251,6 +260,8 @@ void CMealCalculatorFrame::resetMeal(wxEvent& event)
 
 	clearIngredientTextCtrls();
 	IngredientNameTextCtrl->SetFocus();
+
+	setStatus("Meal reset");
 	
 }
 
@@ -275,13 +286,16 @@ void CMealCalculatorFrame::loadMeal(wxEvent& event)
 		addListBoxEntry(ingredient.getName());
 	}
 
+	setStatus("Meal Loaded");
 }
 
 /* Saves the meal to disk */
 void CMealCalculatorFrame::saveMeal(wxEvent& event)
 {
 	meal->saveToFile(SaveMealFilePicker->GetPath().ToStdString());
-	showInfo("Meal saved");
+	//showInfo("Meal saved");
+
+	setStatus("Meal saved");
 }
 
 
@@ -320,6 +334,8 @@ void CMealCalculatorFrame::selectIngredient(wxEvent & event)
 	// Protein
 	sprintf(stringBuffer, "%.2f", ingredient->getProteinPer100g());
 	IngredientProteinTextCtrl->SetValue(std::string(stringBuffer));
+
+	setStatus("");
 }
 
 void CMealCalculatorFrame::updateIngredientButton(wxEvent & event)
@@ -348,6 +364,11 @@ void CMealCalculatorFrame::showInfo(std::string message)
 {
 	wxMessageDialog(nullptr, message, "Information", wxICON_INFORMATION|wxCENTRE).ShowModal();
 
+}
+
+void CMealCalculatorFrame::setStatus(std::string statusMessage)
+{
+	StatusBar->SetStatusText(" " + statusMessage);
 }
 
 /* Adds an item to the Meal Ingredients ListBox */
