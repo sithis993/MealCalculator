@@ -32,6 +32,7 @@ private:
 	void updateIngredientButton(wxEvent& event);
 	void showError(std::string message);
 	void showInfo(std::string message);
+	void setStatus(std::string statusMessage);
 
 	void newIngredient(wxEvent& event);
 	void loadIngredient(wxEvent& event);
