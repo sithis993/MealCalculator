@@ -166,12 +166,6 @@ CIngredient* CMealCalculatorFrame::getCurrentIngredient()
 		return ingredient;
 	}
 
-	if (calories == 0.0)
-	{
-		showError("Ingredient calories must be a number greater than zero");
-		return ingredient;
-	}
-
 	ingredient = new CIngredient(
 		name,
 		brand,
