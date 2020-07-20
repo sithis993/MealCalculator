@@ -98,22 +98,6 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 
 	IngredientDetailsSizer->Add( bSizer81, 1, wxEXPAND, 5 );
 
-	wxBoxSizer* bSizer8;
-	bSizer8 = new wxBoxSizer( wxHORIZONTAL );
-
-	m_staticText3 = new wxStaticText( IngredientDetailsSizer->GetStaticBox(), wxID_ANY, wxT("Grams"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText3->Wrap( -1 );
-	bSizer8->Add( m_staticText3, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-
-
-	bSizer8->Add( 0, 0, 1, wxEXPAND, 5 );
-
-	IngredientGramsTextCtrl = new wxTextCtrl( IngredientDetailsSizer->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer8->Add( IngredientGramsTextCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-
-
-	IngredientDetailsSizer->Add( bSizer8, 1, wxEXPAND, 5 );
-
 
 	bSizer6->Add( IngredientDetailsSizer, 0, wxEXPAND, 5 );
 
@@ -193,11 +177,17 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 
 	bSizer6->Add( IngredientNutritionSizer, 0, wxEXPAND, 5 );
 
+	wxStaticBoxSizer* IngredientGramsSizer;
+	IngredientGramsSizer = new wxStaticBoxSizer( new wxStaticBox( IngredientDetailsPanel, wxID_ANY, wxT("Grams") ), wxVERTICAL );
 
-	bSizer6->Add( 0, 0, 1, wxEXPAND, 5 );
+	IngredientGramsTextCtrl = new wxTextCtrl( IngredientGramsSizer->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_CENTER|wxTE_PROCESS_ENTER );
+	IngredientGramsSizer->Add( IngredientGramsTextCtrl, 0, wxALL|wxEXPAND, 5 );
 
-	IngredientButton = new wxButton( IngredientDetailsPanel, wxID_ANY, wxT("Add to Meal"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer6->Add( IngredientButton, 0, wxALL|wxEXPAND, 5 );
+	IngredientButton = new wxButton( IngredientGramsSizer->GetStaticBox(), wxID_ANY, wxT("Add to Meal"), wxDefaultPosition, wxDefaultSize, 0 );
+	IngredientGramsSizer->Add( IngredientButton, 0, wxALL|wxEXPAND, 5 );
+
+
+	bSizer6->Add( IngredientGramsSizer, 1, wxEXPAND, 5 );
 
 
 	IngredientDetailsPanel->SetSizer( bSizer6 );
