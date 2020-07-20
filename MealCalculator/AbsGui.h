@@ -51,8 +51,6 @@ class MealCalculatorFrame : public wxFrame
 		wxTextCtrl* IngredientNameTextCtrl;
 		wxStaticText* m_staticText31;
 		wxTextCtrl* IngredientBrandTextCtrl1;
-		wxStaticText* m_staticText3;
-		wxTextCtrl* IngredientGramsTextCtrl;
 		wxStaticText* m_staticText13;
 		wxTextCtrl* IngredientCaloriesTextCtrl;
 		wxStaticText* m_staticText14;
@@ -61,6 +59,7 @@ class MealCalculatorFrame : public wxFrame
 		wxTextCtrl* IngredientCarbohydratesTextCtrl;
 		wxStaticText* m_staticText15;
 		wxTextCtrl* IngredientProteinTextCtrl;
+		wxTextCtrl* IngredientGramsTextCtrl;
 		wxButton* IngredientButton;
 		wxPanel* MealActionsPanel;
 		wxButton* NewIngredientButton;
@@ -75,7 +74,7 @@ class MealCalculatorFrame : public wxFrame
 
 	public:
 
-		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 556,354 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 556,380 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~MealCalculatorFrame();
 
