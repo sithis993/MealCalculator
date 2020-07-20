@@ -244,6 +244,7 @@ MealCalculatorFrame::MealCalculatorFrame( wxWindow* parent, wxWindowID id, const
 
 	this->SetSizer( bSizer1 );
 	this->Layout();
+	StatusBar = this->CreateStatusBar( 1, 0, wxID_ANY );
 
 	this->Centre( wxBOTH );
 }

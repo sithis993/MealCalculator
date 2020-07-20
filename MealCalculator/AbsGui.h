@@ -26,6 +26,7 @@
 #include <wx/textctrl.h>
 #include <wx/filepicker.h>
 #include <wx/statline.h>
+#include <wx/statusbr.h>
 #include <wx/frame.h>
 #include <wx/dialog.h>
 
@@ -71,10 +72,11 @@ class MealCalculatorFrame : public wxFrame
 		wxFilePickerCtrl* SaveMealFilePicker;
 		wxStaticLine* m_staticline2;
 		wxButton* CalculateButton;
+		wxStatusBar* StatusBar;
 
 	public:
 
-		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 556,380 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MealCalculatorFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Meal Calculator - v0.0.0"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 570,405 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~MealCalculatorFrame();
 
