@@ -23,6 +23,7 @@ void CMealCalculatorFrame::setEvents()
 {
 
 	IngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::addIngredient, this);
+	IngredientGramsTextCtrl->Bind(wxEVT_TEXT_ENTER, &CMealCalculatorFrame::addIngredient, this);
 	RemoveIngredientButton->Bind(wxEVT_BUTTON, &CMealCalculatorFrame::removeIngredient, this);
 	MealIngredientsListBox->Bind(wxEVT_LISTBOX, &CMealCalculatorFrame::selectIngredient, this);
 	IngredientNameTextCtrl->Bind(wxEVT_TEXT, &CMealCalculatorFrame::updateIngredientButton, this);
@@ -90,6 +91,10 @@ void CMealCalculatorFrame::addIngredient(wxEvent & event)
 		oldIngredient->setCarbohydratesPer100g(newIngredient->getCarbohydratesPer100g());
 		oldIngredient->setProteinPer100g(newIngredient->getProteinPer100g());
 	}
+
+	clearIngredientTextCtrls();
+	IngredientNameTextCtrl->SetFocus();
+	MealIngredientsListBox->DeselectAll();
 
 }
 
